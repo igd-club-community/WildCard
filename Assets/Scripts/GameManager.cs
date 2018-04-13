@@ -6,6 +6,22 @@ using UnityEngine.Networking.NetworkSystem;
 
 public class GameManager : NetworkManager {
 
+
+    public string ip = "localhost";
+    
+
+    public enum GameStates
+    {
+        Menu,
+        Settings,
+        Tutorial,
+        Connecting,
+        Round,
+        Animation,
+        End
+    }
+
+
     public int maxPlayers = 2;
     public GameObject server;
     public GameObject playerBluePrefab;
