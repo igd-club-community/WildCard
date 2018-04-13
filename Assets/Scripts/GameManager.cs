@@ -8,7 +8,13 @@ public class GameManager : NetworkManager {
 
 
     public string ip = "localhost";
-    
+    public GameObject canvasUI;
+
+  
+    public GameStates currentState;
+    public GameObject tutorialSprite;
+ 
+
 
     public enum GameStates
     {
@@ -16,6 +22,7 @@ public class GameManager : NetworkManager {
         Settings,
         Tutorial,
         Connecting,
+        StartWaiting,
         Round,
         Animation,
         End
@@ -26,6 +33,49 @@ public class GameManager : NetworkManager {
     public GameObject server;
     public GameObject playerBluePrefab;
     public GameObject playerRedPrefab;
+
+    public void ShowTutorial()
+    {
+        currentState = GameStates.Tutorial;
+        tutorialSprite.SetActive(true);
+        canvasUI.SetActive(false);
+    }
+
+    public void ConnectPlayer()
+    {
+        tutorialSprite.SetActive(false);
+    }
+
+    public void StartRound()
+    {
+
+    }
+
+    private void Update()
+    {
+
+        if (Input.GetButtonDown("Start"))
+        {
+            if (currentState == GameStates.Tutorial)
+            {
+                currentState = GameStates.Connecting;
+                ConnectPlayer();
+            }
+            else if (currentState == GameStates.StartWaiting)
+            {
+                currentState = GameStates.Round;
+                StartRound();
+            }
+        }
+    }
+
+
+
+
+
+
+
+
 
     public override void OnServerAddPlayer(NetworkConnection conn, short playerControllerId)
     {
