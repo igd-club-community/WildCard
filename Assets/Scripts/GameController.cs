@@ -14,7 +14,7 @@ public class GameController : NetworkBehaviour {
     public int[] AvailableCards;
     public GameObject[] cardSockets;
 
-    public int playerID;
+   
 
 
     public SceneController sceneController;
@@ -25,6 +25,10 @@ public class GameController : NetworkBehaviour {
 
 
     //for server interaction:
+
+    [SyncVar]
+    public int ID;
+
     [SyncVar]
     public bool didFire = false;
 
@@ -94,7 +98,7 @@ public class GameController : NetworkBehaviour {
     [ClientRpc]
     public void Rpc_ChangeHealth(int player0Health, int player1Health)
     {
-        if (playerID == 0)
+        if (ID == 0)
         {
 
             player.Health = player0Health;
@@ -114,7 +118,7 @@ public class GameController : NetworkBehaviour {
 
 
 
-        if(playerID == 0)
+        if(ID == 0)
         {
             
             player.SetState(player0State);
@@ -135,7 +139,7 @@ public class GameController : NetworkBehaviour {
         cardDesk = new CardDesk();
         AvailableCards = new int[4];
         sceneController.StartGame();
-        if (playerID == 0)
+        if (ID == 0)
         {
             player = GameObject.Instantiate(bluePlayerPrefab, new Vector3(-3.05f, -0.68f, 0), Quaternion.identity).GetComponent<PlayerController>();
             enemy = GameObject.Instantiate(redEnemyPrefab, new Vector3(3.66f, -0.68f, 0), Quaternion.Euler(0, -180, 0)).GetComponent<EnemyController>();
@@ -162,7 +166,7 @@ public class GameController : NetworkBehaviour {
         switch (winner)
         {
             case 0:
-                if (playerID == 0)
+                if (ID == 0)
                 {
                     player.SetState(ServerBehaviour.PlayerState.NoDamaged);
                     enemy.SetState(ServerBehaviour.PlayerState.Dead);
@@ -174,7 +178,7 @@ public class GameController : NetworkBehaviour {
                 }
                 break;
             case 1:
-                if (playerID == 1)
+                if (ID == 1)
                 {
                     player.SetState(ServerBehaviour.PlayerState.NoDamaged);
                     enemy.SetState(ServerBehaviour.PlayerState.Dead);
