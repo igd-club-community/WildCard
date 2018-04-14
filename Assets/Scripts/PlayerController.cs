@@ -35,6 +35,26 @@ public class PlayerController : MonoBehaviour {
 
         }
     }
+
+
+
+    public void SetState(ServerBehaviour.PlayerState state)
+    {
+        switch (state)
+        {
+            case ServerBehaviour.PlayerState.Damaged:
+                animator.SetTrigger("Damaged");
+                break;
+            case ServerBehaviour.PlayerState.NoDamaged:
+                animator.SetTrigger("NoDamaged");
+                break;
+            case ServerBehaviour.PlayerState.Healed:
+                animator.SetTrigger("Healed");
+                break;
+        }
+    }
+
+
     // Use this for initialization
     void Start () {
                 
@@ -80,11 +100,9 @@ public class PlayerController : MonoBehaviour {
         {
             if (m_ShotAxis == false)
             {
-                
-                
-                Debug.Log("RT");
 
 
+                gameController.Cmd_FinishRound();
                 m_ShotAxis = true;
             }
         }

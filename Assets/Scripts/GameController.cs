@@ -8,22 +8,20 @@ public class GameController : NetworkBehaviour {
 
     public GameObject redPlayerPrefab;
     public GameObject bluePlayerPrefab;
+    public GameObject redEnemyPrefab;
+    public GameObject BlueEnemyPrefab;
     public CardDesk cardDesk;
     public int[] AvailableCards;
     public GameObject[] cardSockets;
 
     public int playerID;
 
-    public string ip = "localhost";
-    public GameObject canvasUI;
 
-
-    public GameStates currentState;
-    public GameObject tutorialSprite;
-
+    public SceneController sceneController;
 
 
     private PlayerController player;
+    private EnemyController  enemy;
 
 
     //for server interaction:
@@ -42,6 +40,9 @@ public class GameController : NetworkBehaviour {
     [SyncVar]
     public int Health;
 
+    [SyncVar]
+    public int _maxHealth;
+
     public enum GameStates
     {
         Menu,
@@ -53,32 +54,6 @@ public class GameController : NetworkBehaviour {
         Animation,
         End
     }
-
-
-    public void ShowTutorial()
-    {
-        currentState = GameStates.Tutorial;
-        tutorialSprite.SetActive(true);
-        canvasUI.SetActive(false);
-    }
-
-    public void ConnectPlayer()
-    {
-        tutorialSprite.SetActive(false);
-        if (playerID == 0)
-        {
-            player = GameObject.Instantiate(bluePlayerPrefab, new Vector3(-3.05f, -0.68f, 0), Quaternion.identity).GetComponent<PlayerController>();
-            
-        }
-        else
-        {
-            player = GameObject.Instantiate(redPlayerPrefab, new Vector3(3.66f, -0.68f, 0), Quaternion.Euler(0, -180, 0)).GetComponent<PlayerController>();
-        }
-
-    }
-
-    
-   
 
 
     [ClientRpc]
@@ -117,22 +92,21 @@ public class GameController : NetworkBehaviour {
 
 
     [ClientRpc]
-    public void Rpc_Animate(ServerBehaviour.PlayerState roundResult)
+    public void Rpc_Animate(ServerBehaviour.PlayerState player0State, ServerBehaviour.PlayerState player1State)
     {
 
-        //Cmd_SetReady(false);
-        switch (roundResult)
+        if(playerID == 0)
         {
-            case ServerBehaviour.PlayerState.Damaged:
-                animator.SetTrigger("Damaged");
-                break;
-            case ServerBehaviour.PlayerState.NoDamaged:
-                animator.SetTrigger("NoDamaged");
-                break;
-            case ServerBehaviour.PlayerState.Healed:
-                animator.SetTrigger("Healed");
-                break;
+            player.SetState(player0State);
+            enemy.SetState(player1State);
         }
+        else
+        {
+            player.SetState(player1State);
+            enemy.SetState(player0State);
+        }
+
+        
 
     }
 
@@ -140,35 +114,62 @@ public class GameController : NetworkBehaviour {
     {
         cardDesk = new CardDesk();
         AvailableCards = new int[4];
+        sceneController.StartGame();
+        if (playerID == 0)
+        {
+            player = GameObject.Instantiate(bluePlayerPrefab, new Vector3(-3.05f, -0.68f, 0), Quaternion.identity).GetComponent<PlayerController>();
+            enemy = GameObject.Instantiate(redEnemyPrefab, new Vector3(3.66f, -0.68f, 0), Quaternion.Euler(0, -180, 0)).GetComponent<EnemyController>();
+        }
+        else
+        {
+            player = GameObject.Instantiate(redPlayerPrefab, new Vector3(3.66f, -0.68f, 0), Quaternion.Euler(0, -180, 0)).GetComponent<PlayerController>();
+            enemy = GameObject.Instantiate(BlueEnemyPrefab, new Vector3(-3.05f, -0.68f, 0), Quaternion.identity).GetComponent<EnemyController>();
+        }
 
     }
 
     private void Update()
     {
 
-        if (Input.GetButtonDown("Start"))
-        {
-            if (currentState == GameStates.Tutorial)
-            {
-                currentState = GameStates.Connecting;
-                ConnectPlayer();
-            }
-            else if (currentState == GameStates.Connecting)
-            {
-                currentState = GameStates.StartWaiting;
-
-            }
-        }
+       
     }
 
 
     [ClientRpc]
-    public void Rpc_Finish()
+    public void Rpc_Finish(int winner)
     {
-        if (!IsAlive)
-            animator.SetTrigger("Dead");
-        else
-            animator.SetTrigger("NoDamaged");
+
+        switch (winner)
+        {
+            case 0:
+                if (playerID == 0)
+                {
+                    player.SetState(ServerBehaviour.PlayerState.NoDamaged);
+                    enemy.SetState(ServerBehaviour.PlayerState.Dead);
+                }
+                else
+                {
+                    enemy.SetState(ServerBehaviour.PlayerState.NoDamaged);
+                    player.SetState(ServerBehaviour.PlayerState.Dead);
+                }
+                break;
+            case 1:
+                if (playerID == 1)
+                {
+                    player.SetState(ServerBehaviour.PlayerState.NoDamaged);
+                    enemy.SetState(ServerBehaviour.PlayerState.Dead);
+                }
+                else
+                {
+                    enemy.SetState(ServerBehaviour.PlayerState.NoDamaged);
+                    player.SetState(ServerBehaviour.PlayerState.Dead);
+                }
+                break;
+            case -1:
+                player.SetState(ServerBehaviour.PlayerState.Dead);
+                enemy.SetState(ServerBehaviour.PlayerState.Dead);
+                break;
+        }
     }
 
     public int ID
