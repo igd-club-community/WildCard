@@ -14,6 +14,9 @@ public class PlayerController : NetworkBehaviour {
 
     private Animator animator;
 
+    [SyncVar]
+    public bool didFire = false;
+
     public enum PlayerState
     {
         NoDamaged,
@@ -23,11 +26,11 @@ public class PlayerController : NetworkBehaviour {
     public PlayerState playerState;
 
     [ClientRpc]
-    public void Rpc_ShaffleCards()
+    public void Rpc_Start()
     {
         if (isLocalPlayer)
         {
-            Cmd_SetReady(false);
+            //Cmd_SetReady(false);
 
             for (int i = 0; i < 4; i++)
             {
@@ -60,7 +63,7 @@ public class PlayerController : NetworkBehaviour {
     public void Rpc_Animate(ServerBehaviour.PlayerState roundResult)
     {
 
-        Cmd_SetReady(false);
+        //Cmd_SetReady(false);
         switch (roundResult)
         {
             case ServerBehaviour.PlayerState.Damaged:
@@ -92,6 +95,9 @@ public class PlayerController : NetworkBehaviour {
 
     [SyncVar]
     public SyncListInt SelectedCards = new SyncListInt();
+
+    [SyncVar]
+    public SyncListInt EnemyCards = new SyncListInt();
     
     public int _maxHealth = 10;
 
@@ -230,9 +236,11 @@ public class PlayerController : NetworkBehaviour {
     [Command]
     public void Cmd_FinishRound()
     {
-        GameObject.Find("GameServer").GetComponent<ServerBehaviour>().FinishRound();
+        ServerBehaviour server = GameObject.Find("GameServer").GetComponent<ServerBehaviour>();
+        if (server.state == ServerBehaviour.State.Round)
+            didFire = true;
+        server.FinishRound();
         Cmd_InitSelectedCards();
-
     }
 
     [Command]

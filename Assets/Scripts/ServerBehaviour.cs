@@ -18,7 +18,7 @@ public class ServerBehaviour : NetworkBehaviour
     
     public enum State
     {
-        Round, Animation, Start, Finish, Pause, Connecting
+         Connecting, Start, Round, Animation, Finish
     }
 
     public enum PlayerState
@@ -35,21 +35,28 @@ public class ServerBehaviour : NetworkBehaviour
 
     public void StartRound()
     {
-        state = State.Round;
         endTime = Time.fixedTime + roundTime;
         foreach(GameObject player in players){
-            player.GetComponent<PlayerController>().Rpc_ShaffleCards();
+            player.GetComponent<PlayerController>().ready = false;
+            player.GetComponent<PlayerController>().didFire = false;
+            player.GetComponent<PlayerController>().Rpc_Start();
         }
+        state = State.Round;
     }
 
     public void Animate(PlayerState[] nextStates)
     {
-        state = State.Animation;
         for(int i = 0; i < players.Count; i++)
         {
-            //player.GetComponent<PlayerController>().ready = false;
-            players[i].GetComponent<PlayerController>().Rpc_Animate(nextStates[i]);
+            PlayerController player = players[i].GetComponent<PlayerController>();
+            player.ready = false;
+            player.EnemyCards.Clear();
+            foreach(int card in players[1 - i].GetComponent<PlayerController>().SelectedCards){
+                player.EnemyCards.Add(card);
+            }
+            player.Rpc_Animate(nextStates[i]);
         }
+        state = State.Animation;
     }
 
     public PlayerState[] ApplyActions()
