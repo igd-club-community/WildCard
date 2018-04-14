@@ -54,7 +54,7 @@ public class ServerBehaviour : NetworkBehaviour
             foreach(int card in players[1 - i].GetComponent<PlayerController>().SelectedCards){
                 player.EnemyCards.Add(card);
             }
-            player.Rpc_Animate(nextStates[i]);
+            player.Rpc_Animate(nextStates[0], nextStates[1]);
         }
         state = State.Animation;
     }

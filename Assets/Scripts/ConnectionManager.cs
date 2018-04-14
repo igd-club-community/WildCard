@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.Networking;
 using UnityEngine.Networking.NetworkSystem;
 
-public class GameManager : NetworkManager {
+public class ConnectionManager : NetworkManager {
 
 
     public string ip = "localhost";
