@@ -196,12 +196,6 @@ public class GameController : NetworkBehaviour {
         }
     }
 
-    public int ID
-    {
-        get;
-        set;
-    }
-
     [Command]
     private void Cmd_InitSelectedCards()
     {

@@ -17,6 +17,8 @@ public class SettingButton : MonoBehaviour {
         else isHostField.gameObject.SetActive(true);
     }
 
+    
+
 
 
 

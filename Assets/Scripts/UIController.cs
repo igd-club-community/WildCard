@@ -26,7 +26,7 @@ public class UIController : MonoBehaviour {
 
         
 
-
+        /*
 
         GameObject blueGameobj = GameObject.Find("Cowboy(Clone)");
         GameObject redGameobj = GameObject.Find("CowboyRed(Clone)");
@@ -52,6 +52,6 @@ public class UIController : MonoBehaviour {
 
         }
 
-
+    */
     }
 }

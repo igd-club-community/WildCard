@@ -23,7 +23,7 @@ public class ServerBehaviour : NetworkBehaviour
 
     public enum PlayerState
     {
-        Healed, Damaged, NoDamaged 
+        Healed, Damaged, NoDamaged, Dead 
     }
 
     public List<GameObject> players = new List<GameObject>();
@@ -37,9 +37,9 @@ public class ServerBehaviour : NetworkBehaviour
     {
         endTime = Time.fixedTime + roundTime;
         foreach(GameObject player in players){
-            player.GetComponent<PlayerController>().ready = false;
-            player.GetComponent<PlayerController>().didFire = false;
-            player.GetComponent<PlayerController>().Rpc_Start();
+            player.GetComponent<GameController>().ready = false;
+            player.GetComponent<GameController>().didFire = false;
+            player.GetComponent<GameController>().Rpc_StartRound();
         }
         state = State.Round;
     }
@@ -48,10 +48,10 @@ public class ServerBehaviour : NetworkBehaviour
     {
         for(int i = 0; i < players.Count; i++)
         {
-            PlayerController player = players[i].GetComponent<PlayerController>();
+            GameController player = players[i].GetComponent<GameController>();
             player.ready = false;
             player.EnemyCards.Clear();
-            foreach(int card in players[1 - i].GetComponent<PlayerController>().SelectedCards){
+            foreach(int card in players[1 - i].GetComponent<GameController>().SelectedCards){
                 player.EnemyCards.Add(card);
             }
             player.Rpc_Animate(nextStates[0], nextStates[1]);
@@ -62,11 +62,11 @@ public class ServerBehaviour : NetworkBehaviour
     public PlayerState[] ApplyActions()
     {
         PlayerActionStruct[] playerActions = new PlayerActionStruct[2];
-        for (int i = 0; i < players[0].GetComponent<PlayerController>().SelectedCards.Count; i++)
+        for (int i = 0; i < players[0].GetComponent<GameController>().SelectedCards.Count; i++)
         {
             for (int j = 0; j < 2; j++)
             {
-                int cdIndex = players[j].GetComponent<PlayerController>().SelectedCards[i];
+                int cdIndex = players[j].GetComponent<GameController>().SelectedCards[i];
                 if (cdIndex < 0)
                     continue;
                 Card card = GameObject.Find("GameManager").GetComponent<CardDesk>().cardDesk[cdIndex];
@@ -94,17 +94,17 @@ public class ServerBehaviour : NetworkBehaviour
         PlayerState[] playerStates = new PlayerState[2];
         for (int j = 0; j < 2; j++)
         {
-            int playerHP = players[j].GetComponent<PlayerController>().Health -
+            int playerHP = players[j].GetComponent<GameController>().Health -
             Mathf.Max(0, playerActions[j].damage - playerActions[j].evade) +
             playerActions[j].heal;
-            playerHP = Mathf.Min(players[j].GetComponent<PlayerController>()._maxHealth, playerHP);
-            if (playerHP > players[j].GetComponent<PlayerController>().Health)
+            playerHP = Mathf.Min(players[j].GetComponent<GameController>()._maxHealth, playerHP);
+            if (playerHP > players[j].GetComponent<GameController>().Health)
                 playerStates[j] = PlayerState.Healed;
-            else if (playerHP < players[j].GetComponent<PlayerController>().Health)
+            else if (playerHP < players[j].GetComponent<GameController>().Health)
                 playerStates[j] = PlayerState.Damaged;
             else
                 playerStates[j] = PlayerState.NoDamaged;
-            players[j].GetComponent<PlayerController>().Health = playerHP;
+            players[j].GetComponent<GameController>().Health = playerHP;
         }
         return playerStates;
     }
@@ -114,7 +114,7 @@ public class ServerBehaviour : NetworkBehaviour
         if (state.Equals(State.Round))
         {
             PlayerState[] nextStates = ApplyActions();
-            if (players[0].GetComponent<PlayerController>().IsAlive && players[1].GetComponent<PlayerController>().IsAlive)
+            if (players[0].GetComponent<GameController>().Health>0 && players[1].GetComponent<GameController>().Health>0)
                 Animate(nextStates);
             else
                 state = State.Finish;
@@ -130,8 +130,8 @@ public class ServerBehaviour : NetworkBehaviour
         {
             if (state.Equals(State.Start) || state.Equals(State.Animation))
             {
-                bool pl2ready = players[1].GetComponent<PlayerController>().ready;
-                bool pl1ready = players[0].GetComponent<PlayerController>().ready;
+                bool pl2ready = players[1].GetComponent<GameController>().ready;
+                bool pl1ready = players[0].GetComponent<GameController>().ready;
                 if (pl1ready && pl2ready)
                 {
                     Debug.Log("Both true");
@@ -148,9 +148,14 @@ public class ServerBehaviour : NetworkBehaviour
             else if (state.Equals(State.Finish) && !isFinished)
             {
                 isFinished = true;
+                int winner = -1;
+                if (players[0].GetComponent<GameController>().Health > 0)
+                    winner = 0;
+                if (players[1].GetComponent<GameController>().Health > 0)
+                    winner = 1;
                 foreach (GameObject player in players)
                 {
-                    player.GetComponent<PlayerController>().Rpc_Finish();
+                    player.GetComponent<GameController>().Rpc_Finish(winner);
                 }
             }
         }
