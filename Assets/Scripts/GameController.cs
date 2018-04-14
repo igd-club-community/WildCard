@@ -92,11 +92,31 @@ public class GameController : NetworkBehaviour {
 
 
     [ClientRpc]
+    public void Rpc_ChangeHealth(int player0Health, int player1Health)
+    {
+        if (playerID == 0)
+        {
+
+            player.Health = player0Health;
+            enemy.Health = player1Health;
+        }
+        else
+        {
+            player.Health = player1Health;
+            enemy.Health = player0Health;
+        }
+
+    }
+
+    [ClientRpc]
     public void Rpc_Animate(ServerBehaviour.PlayerState player0State, ServerBehaviour.PlayerState player1State)
     {
 
+
+
         if(playerID == 0)
         {
+            
             player.SetState(player0State);
             enemy.SetState(player1State);
         }
