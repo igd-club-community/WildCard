@@ -5,7 +5,6 @@ using UnityEngine.Networking;
 
 public class GameController : NetworkBehaviour {
 
-
     public GameObject redPlayerPrefab;
     public GameObject bluePlayerPrefab;
     public GameObject redEnemyPrefab;
@@ -14,15 +13,10 @@ public class GameController : NetworkBehaviour {
     public int[] AvailableCards;
     public GameObject[] cardSockets;
 
-   
-
-
     public SceneController sceneController;
-
 
     private PlayerController player;
     private EnemyController  enemy;
-
 
     //for server interaction:
 
@@ -42,7 +36,7 @@ public class GameController : NetworkBehaviour {
     public bool ready;
 
     [SyncVar]
-    public int Health;
+    public int health;
 
     [SyncVar]
     public int _maxHealth;
@@ -101,23 +95,20 @@ public class GameController : NetworkBehaviour {
         if (ID == 0)
         {
 
-            player.Health = player0Health;
-            enemy.Health = player1Health;
+            player.health = player0Health;
+            enemy.health = player1Health;
         }
         else
         {
-            player.Health = player1Health;
-            enemy.Health = player0Health;
+            player.health = player1Health;
+            enemy.health = player0Health;
         }
 
     }
 
     [ClientRpc]
-    public void Rpc_Animate(ServerBehaviour.PlayerState player0State, ServerBehaviour.PlayerState player1State)
+    public void Rpc_Animate(PlayerState player0State, PlayerState player1State)
     {
-
-
-
         if(ID == 0)
         {
             
@@ -168,30 +159,30 @@ public class GameController : NetworkBehaviour {
             case 0:
                 if (ID == 0)
                 {
-                    player.SetState(ServerBehaviour.PlayerState.NoDamaged);
-                    enemy.SetState(ServerBehaviour.PlayerState.Dead);
+                    player.SetState(PlayerState.Idle);
+                    enemy.SetState(PlayerState.Dead);
                 }
                 else
                 {
-                    enemy.SetState(ServerBehaviour.PlayerState.NoDamaged);
-                    player.SetState(ServerBehaviour.PlayerState.Dead);
+                    enemy.SetState(PlayerState.Idle);
+                    player.SetState(PlayerState.Dead);
                 }
                 break;
             case 1:
                 if (ID == 1)
                 {
-                    player.SetState(ServerBehaviour.PlayerState.NoDamaged);
-                    enemy.SetState(ServerBehaviour.PlayerState.Dead);
+                    player.SetState(PlayerState.Idle);
+                    enemy.SetState(PlayerState.Dead);
                 }
                 else
                 {
-                    enemy.SetState(ServerBehaviour.PlayerState.NoDamaged);
-                    player.SetState(ServerBehaviour.PlayerState.Dead);
+                    enemy.SetState(PlayerState.Idle);
+                    player.SetState(PlayerState.Dead);
                 }
                 break;
             case -1:
-                player.SetState(ServerBehaviour.PlayerState.Dead);
-                enemy.SetState(ServerBehaviour.PlayerState.Dead);
+                player.SetState(PlayerState.Dead);
+                enemy.SetState(PlayerState.Dead);
                 break;
         }
     }
