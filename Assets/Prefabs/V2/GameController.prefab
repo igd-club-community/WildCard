@@ -1,0 +1,106 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &100100000
+Prefab:
+  m_ObjectHideFlags: 1
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications: []
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 0}
+  m_RootGameObject: {fileID: 1217826836757414}
+  m_IsPrefabParent: 1
+--- !u!1 &1217826836757414
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4706680530172734}
+  - component: {fileID: 114143341572869570}
+  - component: {fileID: 114845093451195636}
+  m_Layer: 0
+  m_Name: GameController
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4706680530172734
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1217826836757414}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 376.65094, y: 310.64975, z: -0.47799593}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &114143341572869570
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1217826836757414}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 372142912, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SceneId:
+    m_Value: 0
+  m_AssetId:
+    i0: 37
+    i1: 157
+    i2: 145
+    i3: 101
+    i4: 254
+    i5: 17
+    i6: 2
+    i7: 116
+    i8: 234
+    i9: 5
+    i10: 244
+    i11: 228
+    i12: 193
+    i13: 137
+    i14: 77
+    i15: 13
+  m_ServerOnly: 0
+  m_LocalPlayerAuthority: 0
+--- !u!114 &114845093451195636
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1217826836757414}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 701bf4bccff47ac48a5ac92940bc884f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  redPlayerPrefab: {fileID: 1419029166125068, guid: 10321a28480c1ac4595ec74bd9356e63,
+    type: 2}
+  bluePlayerPrefab: {fileID: 1858941499390642, guid: 6c9b0eb1892b0fc47abe30b651fd4623,
+    type: 2}
+  redEnemyPrefab: {fileID: 1025372741165620, guid: 92c1ec544990ef54d904332b43be0cd3,
+    type: 2}
+  BlueEnemyPrefab: {fileID: 1493212558154442, guid: 299d0477d4cd5fc4886e276dacfc1536,
+    type: 2}
+  cardDesk: {fileID: 114935297126774240, guid: 4ae30e7606ab1c546be2752036638dc2, type: 2}
+  AvailableCards: 
+  cardSockets:
+  - {fileID: 1677859989598472, guid: 5051b71cccdab664ca3d377ca1b05e22, type: 2}
+  - {fileID: 1336153608665248, guid: 5051b71cccdab664ca3d377ca1b05e22, type: 2}
+  - {fileID: 1805246559369872, guid: 5051b71cccdab664ca3d377ca1b05e22, type: 2}
+  - {fileID: 1065343466828096, guid: 5051b71cccdab664ca3d377ca1b05e22, type: 2}
+  ID: 0
+  didFire: 0
+  ready: 0
+  health: 10
+  _maxHealth: 10

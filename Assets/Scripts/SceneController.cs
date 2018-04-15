@@ -1,8 +1,8 @@
-﻿using System.Collections;
+﻿    using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEditor.Networking;
+using UnityEngine.Networking;
 
 public class SceneController : MonoBehaviour {
 
@@ -16,6 +16,12 @@ public class SceneController : MonoBehaviour {
 
     public GameObject StartButton;
     public GameObject SettingsButton;
+
+    public Text ipAddressField;
+    public Toggle isHost;
+
+    public GameObject cardSockets;
+    
 
     public enum SceneStates
     {
@@ -44,19 +50,20 @@ public class SceneController : MonoBehaviour {
 
     public void StartGame()
     {
-
+        cardSockets.SetActive(true);
         currentState = SceneStates.Game;
         tutorialSprite.SetActive(false);
-        string ipAddress = GameObject.Find("IPField").GetComponent<Text>().text;
+        string ipAddress = ipAddressField.text;
         if (ipAddress == "")
             ipAddress = defaultIP;
-        ConnectionManager connection = GameObject.Find("GameManager").GetComponent<ConnectionManager>();
+        ConnectionManager connection = GameObject.Find("ConnectionManager").GetComponent<ConnectionManager>();
         connection.networkAddress = ipAddress;
         connection.networkPort = defaultPort;
-        if (GameObject.Find("IsHost").GetComponent<Toggle>().isOn)
+        if (isHost.GetComponent<Toggle>().isOn)
             connection.StartHost();
         else
             connection.StartClient();
+
     }
 
     public void FinishGame()
@@ -72,6 +79,18 @@ public class SceneController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		
-	}
+
+        if (Input.GetButtonDown("Start") && currentState == SceneStates.Tutorial)
+        {
+            StartGame();
+            Debug.Log("Start");
+        }
+
+        if (Input.GetButtonDown("Start") && currentState == SceneStates.Menu)
+        {
+            ShowTutorial();
+            Debug.Log("Start");
+        }
+
+    }
 }

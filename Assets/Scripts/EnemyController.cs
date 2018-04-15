@@ -52,7 +52,7 @@ public class EnemyController : MonoBehaviour {
     {
 
         animator = GetComponent<Animator>();
-        animator.SetTrigger("NoDamaged");
+        animator.SetTrigger("Idle");
 
     }
 

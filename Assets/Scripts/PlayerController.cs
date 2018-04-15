@@ -101,10 +101,7 @@ public class PlayerController : MonoBehaviour {
             m_ShotAxisPressed = false;
         }
 
-        if (Input.GetButtonDown("Start"))
-        {
-            Debug.Log("Start");
-        }
+       
     }
 
 }

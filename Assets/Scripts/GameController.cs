@@ -13,7 +13,7 @@ public class GameController : NetworkBehaviour {
     public int[] AvailableCards;
     public GameObject[] cardSockets;
 
-    public SceneController sceneController;
+    
 
     private PlayerController player;
     private EnemyController  enemy;
@@ -127,18 +127,27 @@ public class GameController : NetworkBehaviour {
 
     private void Start()
     {
-        cardDesk = new CardDesk();
+        cardSockets = new GameObject[4];
+        cardDesk = GameObject.Find("CardDesk").GetComponent<CardDesk>();
+        for(int i = 0; i < 4; i++)
+        {
+          
+            cardSockets[i] = GameObject.Find("CardSockets").transform.GetChild(i).gameObject;
+        }
+        Cmd_InitSelectedCards();
         AvailableCards = new int[4];
-        sceneController.StartGame();
+        
         if (ID == 0)
         {
             player = GameObject.Instantiate(bluePlayerPrefab, new Vector3(-3.05f, -0.68f, 0), Quaternion.identity).GetComponent<PlayerController>();
             enemy = GameObject.Instantiate(redEnemyPrefab, new Vector3(3.66f, -0.68f, 0), Quaternion.Euler(0, -180, 0)).GetComponent<EnemyController>();
+            player.gameController = this;
         }
         else
         {
             player = GameObject.Instantiate(redPlayerPrefab, new Vector3(3.66f, -0.68f, 0), Quaternion.Euler(0, -180, 0)).GetComponent<PlayerController>();
             enemy = GameObject.Instantiate(BlueEnemyPrefab, new Vector3(-3.05f, -0.68f, 0), Quaternion.identity).GetComponent<EnemyController>();
+            player.gameController = this;
         }
 
     }
@@ -202,7 +211,7 @@ public class GameController : NetworkBehaviour {
         {
             int value = AvailableCards[index];
             Cmd_SetSelectedCard(index, value);
-            cardSockets[index].GetComponent<SpriteRenderer>().sprite = cardDesk.cardDesk[AvailableCards[index]]._NotSelectedImage;
+            cardSockets[index].GetComponent<SpriteRenderer>().sprite = cardDesk.cardDesk[AvailableCards[index]]._SelectedImage;
         }
         else
         {
