@@ -51,7 +51,6 @@ public class PlayerController : MonoBehaviour {
     {
         animator = GetComponent<Animator>();
         animator.SetTrigger("RoundStarted");
-
     }
 
 
