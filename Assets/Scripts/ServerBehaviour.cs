@@ -64,7 +64,7 @@ public class ServerBehaviour : NetworkBehaviour
                 int cdIndex = players[j].GetComponent<GameController>().SelectedCards[i];
                 if (cdIndex < 0)
                     continue;
-                Card card = GameObject.Find("GameManager").GetComponent<CardDesk>().cardDesk[cdIndex];
+                Card card = GameObject.Find("GameController").GetComponent<CardDesk>().cardDesk[cdIndex];
                 switch (card._ActionType)
                 {
                     case Action.DamageBoth:
