@@ -34,7 +34,6 @@ sysinfo.txt
 *.apk
 *.unitypackage
 
-ProjectSettings/ProjectSettings.asset
 ProjectSettings/ProjectVersion.txt
 
  
