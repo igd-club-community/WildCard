@@ -28,15 +28,19 @@ public class ServerBehaviour : NetworkBehaviour
 		
 	}
 
-    public void StartRound()
+    private void StartRound()
     {
         state = State.Round;
         endTime = Time.fixedTime + roundTime;
-        foreach(GameObject player in players){
-            player.GetComponent<GameController>().ready = false;
-            player.GetComponent<GameController>().didFire = false;
-            player.GetComponent<GameController>().Rpc_StartRound();
-        }
+        StartPlayerRound(players[0]);
+        StartPlayerRound(players[1]);
+    }
+
+    private void StartPlayerRound(GameObject player)
+    {
+        player.GetComponent<GameController>().ready = false;
+        player.GetComponent<GameController>().didFire = false;
+        player.GetComponent<GameController>().Rpc_StartRound();
     }
 
     public void Animate(PlayerState[] nextStates)
