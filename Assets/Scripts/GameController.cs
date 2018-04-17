@@ -59,8 +59,8 @@ public class GameController : NetworkBehaviour {
     {
         if (isLocalPlayer)
         {
-            //Cmd_SetReady(false);
-
+            Cmd_SetReady(false);
+            Debug.Log("Shuffle cards");
             for (int i = 0; i < 4; i++)
             {
 
