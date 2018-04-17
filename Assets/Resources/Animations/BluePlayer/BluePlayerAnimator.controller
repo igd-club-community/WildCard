@@ -365,7 +365,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: f5dc04acc43794dbbb42418963645bcf, type: 2}
+  m_Motion: {fileID: 7400000, guid: f7918bd2e1fa94bffa9d00197595e816, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -391,7 +391,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: a4992fc72b6664ea1a4fd1d2301ca382, type: 2}
+  m_Motion: {fileID: 7400000, guid: 0f42e066771e24884a8d1c702907b243, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -442,7 +442,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: af157d28c55fc45c7bcb4ff89a84f86d, type: 2}
+  m_Motion: {fileID: 7400000, guid: 4dbb5d4931f6d4728add39190d618761, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -469,7 +469,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: 0f42e066771e24884a8d1c702907b243, type: 2}
+  m_Motion: {fileID: 7400000, guid: bb93052fd30b64383b72e2219494be20, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -520,7 +520,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: 82f70f7241bee48d787d84b8dc313834, type: 2}
+  m_Motion: {fileID: 7400000, guid: e27e378d5947149ba93b12051075e9e9, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -548,7 +548,7 @@ AnimatorStateMachine:
     m_Position: {x: 72, y: 240, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 1102500656682054526}
-    m_Position: {x: -192, y: 228, z: 0}
+    m_Position: {x: -216, y: 240, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 1102186058869478930}
     m_Position: {x: -420, y: 120, z: 0}
