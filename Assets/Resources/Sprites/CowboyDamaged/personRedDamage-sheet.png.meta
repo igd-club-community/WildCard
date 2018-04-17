@@ -88,9 +88,9 @@ TextureImporter:
       name: personRedDamage-sheet_0
       rect:
         serializedVersion: 2
-        x: 110
+        x: 0
         y: 0
-        width: 150
+        width: 420
         height: 310
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -102,9 +102,9 @@ TextureImporter:
       name: personRedDamage-sheet_1
       rect:
         serializedVersion: 2
-        x: 530
+        x: 420
         y: 0
-        width: 160
+        width: 420
         height: 310
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -116,9 +116,9 @@ TextureImporter:
       name: personRedDamage-sheet_2
       rect:
         serializedVersion: 2
-        x: 960
+        x: 840
         y: 0
-        width: 150
+        width: 420
         height: 310
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -130,9 +130,9 @@ TextureImporter:
       name: personRedDamage-sheet_3
       rect:
         serializedVersion: 2
-        x: 1370
+        x: 1260
         y: 0
-        width: 150
+        width: 420
         height: 310
       alignment: 0
       pivot: {x: 0, y: 0}

@@ -89,9 +89,9 @@ TextureImporter:
       name: personBlueDodge-sheet_0
       rect:
         serializedVersion: 2
-        x: 109
+        x: 0
         y: 0
-        width: 152
+        width: 420
         height: 310
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -103,9 +103,9 @@ TextureImporter:
       name: personBlueDodge-sheet_1
       rect:
         serializedVersion: 2
-        x: 529
+        x: 420
         y: 0
-        width: 152
+        width: 420
         height: 310
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -117,10 +117,10 @@ TextureImporter:
       name: personBlueDodge-sheet_2
       rect:
         serializedVersion: 2
-        x: 939
+        x: 840
         y: 0
-        width: 142
-        height: 281
+        width: 420
+        height: 310
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -131,10 +131,10 @@ TextureImporter:
       name: personBlueDodge-sheet_3
       rect:
         serializedVersion: 2
-        x: 1359
+        x: 1260
         y: 0
-        width: 132
-        height: 261
+        width: 420
+        height: 310
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -145,10 +145,10 @@ TextureImporter:
       name: personBlueDodge-sheet_4
       rect:
         serializedVersion: 2
-        x: 1789
+        x: 1680
         y: 0
-        width: 122
-        height: 221
+        width: 420
+        height: 310
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
