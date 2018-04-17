@@ -8,7 +8,7 @@ public class SceneController : MonoBehaviour {
 
     private SceneStates currentState;
     private string defaultIP = "localhost";
-    private int defaultPort = 5;
+    private int defaultPort = 1337;
 
     public GameObject canvasUI;
     public GameObject tutorialSprite;
