@@ -254,9 +254,11 @@ public class GameController : NetworkBehaviour {
     {
         ServerBehaviour server = GameObject.Find("GameServer").GetComponent<ServerBehaviour>();
         if (server.state == ServerBehaviour.State.Round)
+        {
             didFire = true;
-        server.FinishRound();
-        Cmd_InitSelectedCards();
+            server.FinishRound();
+            Cmd_InitSelectedCards();
+        }
     }
 
 
