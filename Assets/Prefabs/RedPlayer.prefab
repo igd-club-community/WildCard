@@ -21,7 +21,6 @@ GameObject:
   - component: {fileID: 4963736966137288}
   - component: {fileID: 212987212534966498}
   - component: {fileID: 95630687839248558}
-  - component: {fileID: 114766089039236734}
   - component: {fileID: 114744220744903156}
   - component: {fileID: 82245940252043732}
   m_Layer: 0
@@ -156,38 +155,6 @@ MonoBehaviour:
   health: 10
   playerState: 0
   _maxHealth: 10
---- !u!114 &114766089039236734
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1419029166125068}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 372142912, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_SceneId:
-    m_Value: 0
-  m_AssetId:
-    i0: 16
-    i1: 50
-    i2: 26
-    i3: 40
-    i4: 72
-    i5: 12
-    i6: 26
-    i7: 196
-    i8: 89
-    i9: 94
-    i10: 199
-    i11: 75
-    i12: 217
-    i13: 53
-    i14: 110
-    i15: 99
-  m_ServerOnly: 0
-  m_LocalPlayerAuthority: 1
 --- !u!212 &212987212534966498
 SpriteRenderer:
   m_ObjectHideFlags: 1
