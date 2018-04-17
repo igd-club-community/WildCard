@@ -129,6 +129,7 @@ public class GameController : NetworkBehaviour {
     {
         if (isLocalPlayer)
         {
+            
             cardSockets = new GameObject[4];
             cardDesk = GameObject.Find("CardDesk").GetComponent<CardDesk>();
             for (int i = 0; i < 4; i++)
@@ -151,6 +152,7 @@ public class GameController : NetworkBehaviour {
                 enemy = GameObject.Instantiate(BlueEnemyPrefab, new Vector3(-3.05f, -0.68f, 0), Quaternion.identity).GetComponent<EnemyController>();
                 player.gameController = this;
             }
+            Cmd_SetReady(true);
         }
     }
 
