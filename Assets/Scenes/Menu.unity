@@ -573,7 +573,6 @@ GameObject:
   - component: {fileID: 744812493}
   - component: {fileID: 744812492}
   - component: {fileID: 744812491}
-  - component: {fileID: 744812490}
   - component: {fileID: 744812489}
   m_Layer: 0
   m_Name: ConnectionManager
@@ -596,18 +595,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cardDesk: []
   totalSum: 0
---- !u!114 &744812490
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 114264244303831984, guid: 0351e4e138c6c10438f1aae9c0419d31,
-    type: 2}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 744812488}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 0}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &744812491
 MonoBehaviour:
   m_ObjectHideFlags: 0
