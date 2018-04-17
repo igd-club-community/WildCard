@@ -58,7 +58,9 @@ public class PlayerController : MonoBehaviour {
     // Update is called once per frame
     void Update () 
     {
-            GetPlayerInput(); 
+        GetPlayerInput();
+        if (animator.GetCurrentAnimatorStateInfo(0).IsName("Idle") && !gameController.ready)
+            gameController.Cmd_SetReady(true);
     }
     
 

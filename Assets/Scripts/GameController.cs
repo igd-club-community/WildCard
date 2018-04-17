@@ -106,6 +106,9 @@ public class GameController : NetworkBehaviour {
 
     }
 
+
+    
+
     [ClientRpc]
     public void Rpc_Animate(PlayerState player0State, PlayerState player1State)
     {
