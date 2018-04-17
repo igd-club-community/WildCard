@@ -92,18 +92,20 @@ public class GameController : NetworkBehaviour {
     [ClientRpc]
     public void Rpc_ChangeHealth(int player0Health, int player1Health)
     {
-        if (ID == 0)
+        if (isLocalPlayer)
         {
+            if (ID == 0)
+            {
 
-            player.health = player0Health;
-            enemy.health = player1Health;
+                player.health = player0Health;
+                enemy.health = player1Health;
+            }
+            else
+            {
+                player.health = player1Health;
+                enemy.health = player0Health;
+            }
         }
-        else
-        {
-            player.health = player1Health;
-            enemy.health = player0Health;
-        }
-
     }
 
 
@@ -112,19 +114,21 @@ public class GameController : NetworkBehaviour {
     [ClientRpc]
     public void Rpc_Animate(PlayerState player0State, PlayerState player1State)
     {
-        if(ID == 0)
+        if (isLocalPlayer)
         {
-            
-            player.SetState(player0State);
-            enemy.SetState(player1State);
-        }
-        else
-        {
-            player.SetState(player1State);
-            enemy.SetState(player0State);
-        }
+            if (ID == 0)
+            {
 
-        
+                player.SetState(player0State);
+                enemy.SetState(player1State);
+            }
+            else
+            {
+                player.SetState(player1State);
+                enemy.SetState(player0State);
+            }
+
+        }
 
     }
 
@@ -169,37 +173,39 @@ public class GameController : NetworkBehaviour {
     [ClientRpc]
     public void Rpc_Finish(int winner)
     {
-
-        switch (winner)
+        if (isLocalPlayer)
         {
-            case 0:
-                if (ID == 0)
-                {
-                    player.SetState(PlayerState.Idle);
-                    enemy.SetState(PlayerState.Dead);
-                }
-                else
-                {
-                    enemy.SetState(PlayerState.Idle);
+            switch (winner)
+            {
+                case 0:
+                    if (ID == 0)
+                    {
+                        player.SetState(PlayerState.Idle);
+                        enemy.SetState(PlayerState.Dead);
+                    }
+                    else
+                    {
+                        enemy.SetState(PlayerState.Idle);
+                        player.SetState(PlayerState.Dead);
+                    }
+                    break;
+                case 1:
+                    if (ID == 1)
+                    {
+                        player.SetState(PlayerState.Idle);
+                        enemy.SetState(PlayerState.Dead);
+                    }
+                    else
+                    {
+                        enemy.SetState(PlayerState.Idle);
+                        player.SetState(PlayerState.Dead);
+                    }
+                    break;
+                case -1:
                     player.SetState(PlayerState.Dead);
-                }
-                break;
-            case 1:
-                if (ID == 1)
-                {
-                    player.SetState(PlayerState.Idle);
                     enemy.SetState(PlayerState.Dead);
-                }
-                else
-                {
-                    enemy.SetState(PlayerState.Idle);
-                    player.SetState(PlayerState.Dead);
-                }
-                break;
-            case -1:
-                player.SetState(PlayerState.Dead);
-                enemy.SetState(PlayerState.Dead);
-                break;
+                    break;
+            }
         }
     }
 
