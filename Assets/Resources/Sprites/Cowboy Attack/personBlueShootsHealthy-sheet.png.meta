@@ -10,6 +10,7 @@ TextureImporter:
     21300006: personBlueShootsHealthy-sheet_3
     21300008: personBlueShootsHealthy-sheet_5
     21300010: personBlueShootsHealthy-sheet_6
+    21300012: personBlueShootsHealthy-sheet_4
   externalObjects: {}
   serializedVersion: 4
   mipmaps:
@@ -90,9 +91,9 @@ TextureImporter:
       name: personBlueShootsHealthy-sheet_0
       rect:
         serializedVersion: 2
-        x: 109
+        x: 0
         y: 0
-        width: 152
+        width: 420
         height: 310
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -104,9 +105,9 @@ TextureImporter:
       name: personBlueShootsHealthy-sheet_1
       rect:
         serializedVersion: 2
-        x: 528
+        x: 420
         y: 0
-        width: 153
+        width: 420
         height: 310
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -118,9 +119,9 @@ TextureImporter:
       name: personBlueShootsHealthy-sheet_2
       rect:
         serializedVersion: 2
-        x: 928
+        x: 840
         y: 0
-        width: 174
+        width: 420
         height: 310
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -132,9 +133,23 @@ TextureImporter:
       name: personBlueShootsHealthy-sheet_3
       rect:
         serializedVersion: 2
-        x: 1309
+        x: 1260
         y: 0
-        width: 212
+        width: 420
+        height: 310
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: personBlueShootsHealthy-sheet_4
+      rect:
+        serializedVersion: 2
+        x: 1680
+        y: 0
+        width: 420
         height: 310
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -146,23 +161,9 @@ TextureImporter:
       name: personBlueShootsHealthy-sheet_5
       rect:
         serializedVersion: 2
-        x: 1690
+        x: 2100
         y: 0
-        width: 262
-        height: 310
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: personBlueShootsHealthy-sheet_6
-      rect:
-        serializedVersion: 2
-        x: 2188
-        y: 0
-        width: 185
+        width: 420
         height: 310
       alignment: 0
       pivot: {x: 0, y: 0}
