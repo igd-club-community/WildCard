@@ -21,11 +21,6 @@ public class ServerBehaviour : NetworkBehaviour
          Connecting, Start, Round, Animation, Finish
     }
 
-    public enum PlayerState
-    {
-        Healed, Damaged, NoDamaged, Dead 
-    }
-
     public List<GameObject> players = new List<GameObject>();
 
     // Use this for initialization
@@ -69,7 +64,7 @@ public class ServerBehaviour : NetworkBehaviour
                 int cdIndex = players[j].GetComponent<GameController>().SelectedCards[i];
                 if (cdIndex < 0)
                     continue;
-                Card card = GameObject.Find("GameManager").GetComponent<CardDesk>().cardDesk[cdIndex];
+                Card card = GameObject.Find("GameController").GetComponent<CardDesk>().cardDesk[cdIndex];
                 switch (card._ActionType)
                 {
                     case Action.DamageBoth:
@@ -94,17 +89,17 @@ public class ServerBehaviour : NetworkBehaviour
         PlayerState[] playerStates = new PlayerState[2];
         for (int j = 0; j < 2; j++)
         {
-            int playerHP = players[j].GetComponent<GameController>().Health -
+            int playerHP = players[j].GetComponent<GameController>().health -
             Mathf.Max(0, playerActions[j].damage - playerActions[j].evade) +
             playerActions[j].heal;
             playerHP = Mathf.Min(players[j].GetComponent<GameController>()._maxHealth, playerHP);
-            if (playerHP > players[j].GetComponent<GameController>().Health)
-                playerStates[j] = PlayerState.Healed;
-            else if (playerHP < players[j].GetComponent<GameController>().Health)
-                playerStates[j] = PlayerState.Damaged;
+            if (playerHP > players[j].GetComponent<GameController>().health)
+                playerStates[j] = PlayerState.Healing;
+            else if (playerHP < players[j].GetComponent<GameController>().health)
+                playerStates[j] = PlayerState.Bleeding;
             else
-                playerStates[j] = PlayerState.NoDamaged;
-            players[j].GetComponent<GameController>().Health = playerHP;
+                playerStates[j] = PlayerState.Idle;
+            players[j].GetComponent<GameController>().health = playerHP;
         }
         return playerStates;
     }
@@ -114,7 +109,7 @@ public class ServerBehaviour : NetworkBehaviour
         if (state.Equals(State.Round))
         {
             PlayerState[] nextStates = ApplyActions();
-            if (players[0].GetComponent<GameController>().Health>0 && players[1].GetComponent<GameController>().Health>0)
+            if (players[0].GetComponent<GameController>().health>0 && players[1].GetComponent<GameController>().health>0)
                 Animate(nextStates);
             else
                 state = State.Finish;
@@ -149,9 +144,9 @@ public class ServerBehaviour : NetworkBehaviour
             {
                 isFinished = true;
                 int winner = -1;
-                if (players[0].GetComponent<GameController>().Health > 0)
+                if (players[0].GetComponent<GameController>().health > 0)
                     winner = 0;
-                if (players[1].GetComponent<GameController>().Health > 0)
+                if (players[1].GetComponent<GameController>().health > 0)
                     winner = 1;
                 foreach (GameObject player in players)
                 {

@@ -5,69 +5,59 @@ using UnityEngine.Networking;
 
 public class PlayerController : MonoBehaviour {
 
-
     public GameController gameController;
 
-    private bool m_ShotAxis = false;
+    private bool m_ShotAxisPressed = false;
 
     private Animator animator;
 
-    public int Health;
-
-    public enum PlayerState
-    {
-        NoDamaged,
-        Shooting,
-    }
+    public int health;
 
     public PlayerState playerState;
     public int _maxHealth = 10;
 
-    public bool IsAlive
+    public bool isAlive
     {
         get
         {
-            return Health > 0;
+            return health > 0;
         }
 
-        set
-        {
-
-        }
+        set {}
     }
 
 
 
-    public void SetState(ServerBehaviour.PlayerState state)
+    public void SetState(PlayerState state)
     {
         switch (state)
         {
-            case ServerBehaviour.PlayerState.Damaged:
-                animator.SetTrigger("Damaged");
+            case PlayerState.Bleeding:
+                animator.SetTrigger("WasShot");
                 break;
-            case ServerBehaviour.PlayerState.NoDamaged:
-                animator.SetTrigger("NoDamaged");
+            case PlayerState.Idle:
+                animator.SetTrigger("Stalled");
                 break;
-            case ServerBehaviour.PlayerState.Healed:
-                animator.SetTrigger("Healed");
+            case PlayerState.Healing:
+                animator.SetTrigger("WasHealed");
                 break;
         }
     }
 
 
+
     // Use this for initialization
-    void Start () {
-                
+    void Start () 
+    {
         animator = GetComponent<Animator>();
-        animator.SetTrigger("NoDamaged");
-
+        animator.SetTrigger("RoundStarted");
     }
-
 
 
 
     // Update is called once per frame
-    void Update () {
+    void Update () 
+    {
             GetPlayerInput(); 
     }
     
@@ -98,29 +88,20 @@ public class PlayerController : MonoBehaviour {
         //Gamepad Shot
         if (Input.GetAxisRaw("Shot") != 0)
         {
-            if (m_ShotAxis == false)
+            if (m_ShotAxisPressed == false)
             {
-
-
                 gameController.Cmd_FinishRound();
-                m_ShotAxis = true;
+                m_ShotAxisPressed = true;
             }
         }
 
         if (Input.GetAxisRaw("Shot") == 0)
         {
-            m_ShotAxis = false;
+            m_ShotAxisPressed = false;
         }
 
-        if (Input.GetButtonDown("Start"))
-        {
-            Debug.Log("Start");
-        }
+       
     }
-
-   
-
-   
 
 }
 

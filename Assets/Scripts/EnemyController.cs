@@ -4,19 +4,9 @@ using UnityEngine;
 
 public class EnemyController : MonoBehaviour {
 
-    
-
-    
-
     private Animator animator;
 
-    public int Health;
-
-    public enum PlayerState
-    {
-        NoDamaged,
-        Shooting,
-    }
+    public int health;
 
     public PlayerState playerState;
     public int _maxHealth = 10;
@@ -25,35 +15,36 @@ public class EnemyController : MonoBehaviour {
     {
         get
         {
-            return Health > 0;
+            return health > 0;
         }
-
-        set
-        {
-
-        }
+        
+        set{}
     }
 
 
 
-    public void SetState(ServerBehaviour.PlayerState state)
+    public void SetState(PlayerState state)
     {
         switch (state)
         {
-            case ServerBehaviour.PlayerState.Damaged:
-                animator.SetTrigger("Damaged");
+            case PlayerState.Bleeding:
+                animator.SetTrigger("WasShot");
                 break;
-            case ServerBehaviour.PlayerState.NoDamaged:
-                animator.SetTrigger("NoDamaged");
+            case PlayerState.Idle:
+                animator.SetTrigger("Stalled");
                 break;
-            case ServerBehaviour.PlayerState.Healed:
-                animator.SetTrigger("Healed");
+            case PlayerState.Healing:
+                animator.SetTrigger("WasHealed");
                 break;
-            case ServerBehaviour.PlayerState.Dead:
-                animator.SetTrigger("Dead");
+            case PlayerState.Dead:
+                animator.SetTrigger("Died");
+                break;
+            case PlayerState.Shooting:
+                animator.SetTrigger("AttemptShoot");
                 break;
         }
     }
+
 
 
     // Use this for initialization
@@ -61,10 +52,9 @@ public class EnemyController : MonoBehaviour {
     {
 
         animator = GetComponent<Animator>();
-        animator.SetTrigger("NoDamaged");
+        animator.SetTrigger("Idle");
 
     }
-
 
 
 
@@ -73,11 +63,5 @@ public class EnemyController : MonoBehaviour {
     {
        
     }
-
-
-   
-
-
-
 
 }
