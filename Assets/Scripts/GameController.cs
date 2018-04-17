@@ -127,29 +127,31 @@ public class GameController : NetworkBehaviour {
 
     private void Start()
     {
-        cardSockets = new GameObject[4];
-        cardDesk = GameObject.Find("CardDesk").GetComponent<CardDesk>();
-        for(int i = 0; i < 4; i++)
+        if (isLocalPlayer)
         {
-          
-            cardSockets[i] = GameObject.Find("CardSockets").transform.GetChild(i).gameObject;
-        }
-        Cmd_InitSelectedCards();
-        AvailableCards = new int[4];
-        
-        if (ID == 0)
-        {
-            player = GameObject.Instantiate(bluePlayerPrefab, new Vector3(-3.05f, -0.68f, 0), Quaternion.identity).GetComponent<PlayerController>();
-            enemy = GameObject.Instantiate(redEnemyPrefab, new Vector3(3.66f, -0.68f, 0), Quaternion.Euler(0, -180, 0)).GetComponent<EnemyController>();
-            player.gameController = this;
-        }
-        else
-        {
-            player = GameObject.Instantiate(redPlayerPrefab, new Vector3(3.66f, -0.68f, 0), Quaternion.Euler(0, -180, 0)).GetComponent<PlayerController>();
-            enemy = GameObject.Instantiate(BlueEnemyPrefab, new Vector3(-3.05f, -0.68f, 0), Quaternion.identity).GetComponent<EnemyController>();
-            player.gameController = this;
-        }
+            cardSockets = new GameObject[4];
+            cardDesk = GameObject.Find("CardDesk").GetComponent<CardDesk>();
+            for (int i = 0; i < 4; i++)
+            {
 
+                cardSockets[i] = GameObject.Find("CardSockets").transform.GetChild(i).gameObject;
+            }
+            Cmd_InitSelectedCards();
+            AvailableCards = new int[4];
+
+            if (ID == 0)
+            {
+                player = GameObject.Instantiate(bluePlayerPrefab, new Vector3(-3.05f, -0.68f, 0), Quaternion.identity).GetComponent<PlayerController>();
+                enemy = GameObject.Instantiate(redEnemyPrefab, new Vector3(3.66f, -0.68f, 0), Quaternion.Euler(0, -180, 0)).GetComponent<EnemyController>();
+                player.gameController = this;
+            }
+            else
+            {
+                player = GameObject.Instantiate(redPlayerPrefab, new Vector3(3.66f, -0.68f, 0), Quaternion.Euler(0, -180, 0)).GetComponent<PlayerController>();
+                enemy = GameObject.Instantiate(BlueEnemyPrefab, new Vector3(-3.05f, -0.68f, 0), Quaternion.identity).GetComponent<EnemyController>();
+                player.gameController = this;
+            }
+        }
     }
 
     private void Update()
