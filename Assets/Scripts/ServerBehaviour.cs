@@ -156,7 +156,9 @@ public class ServerBehaviour : NetworkBehaviour
                 foreach (GameObject player in players)
                 {
                     player.GetComponent<GameController>().Rpc_Finish(winner);
+                    player.GetComponent<GameController>().ready = false;
                 }
+                state = State.Start;
             }
         }
 	}
