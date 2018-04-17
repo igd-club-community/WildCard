@@ -3,7 +3,13 @@ guid: f4f4dbb3ec2e46f4da204b30edf0f288
 timeCreated: 1523973401
 licenseType: Free
 TextureImporter:
-  fileIDToRecycleName: {}
+  fileIDToRecycleName:
+    21300000: personRedShootsHealthy-sheet_0
+    21300002: personRedShootsHealthy-sheet_1
+    21300004: personRedShootsHealthy-sheet_2
+    21300006: personRedShootsHealthy-sheet_3
+    21300008: personRedShootsHealthy-sheet_5
+    21300010: personRedShootsHealthy-sheet_6
   externalObjects: {}
   serializedVersion: 4
   mipmaps:
@@ -40,7 +46,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -67,9 +73,103 @@ TextureImporter:
     allowsAlphaSplitting: 0
     overridden: 0
     androidETC2FallbackOverride: 0
+  - buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: personRedShootsHealthy-sheet_0
+      rect:
+        serializedVersion: 2
+        x: 109
+        y: 0
+        width: 152
+        height: 310
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: personRedShootsHealthy-sheet_1
+      rect:
+        serializedVersion: 2
+        x: 528
+        y: 0
+        width: 153
+        height: 310
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: personRedShootsHealthy-sheet_2
+      rect:
+        serializedVersion: 2
+        x: 928
+        y: 0
+        width: 174
+        height: 310
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: personRedShootsHealthy-sheet_3
+      rect:
+        serializedVersion: 2
+        x: 1309
+        y: 0
+        width: 212
+        height: 310
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: personRedShootsHealthy-sheet_5
+      rect:
+        serializedVersion: 2
+        x: 1691
+        y: 0
+        width: 262
+        height: 310
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: personRedShootsHealthy-sheet_6
+      rect:
+        serializedVersion: 2
+        x: 2188
+        y: 0
+        width: 185
+        height: 310
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
     outline: []
     physicsShape: []
   spritePackingTag: 
