@@ -84,23 +84,34 @@ public class PlayerController : MonoBehaviour {
 
         if (Input.GetButtonDown("Socket4"))
         {
+            
             gameController.SetSelectedCard(3);
         }
 
-        //Gamepad Shot
-        if (Input.GetAxisRaw("Shot") != 0)
-        {
-            if (m_ShotAxisPressed == false)
-            {
-                gameController.Cmd_FinishRound();
-                m_ShotAxisPressed = true;
-            }
-        }
+     
+        
 
-        if (Input.GetAxisRaw("Shot") == 0)
-        {
-            m_ShotAxisPressed = false;
-        }
+            //Gamepad Shot
+            if (Input.GetAxisRaw("Shot") != 0 || Input.GetButtonDown("Shot"))
+            {
+                if (m_ShotAxisPressed == false)
+                {
+                    Debug.Log("Gamepad");
+                    gameController.Cmd_FinishRound();
+                    m_ShotAxisPressed = true;
+                }
+            }
+
+            if (Input.GetAxisRaw("Shot") == 0)
+            {
+
+                m_ShotAxisPressed = false;
+            }
+        
+
+       
+       
+       
 
        
     }
