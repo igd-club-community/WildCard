@@ -100,6 +100,9 @@ MonoBehaviour:
   - {fileID: 1336153608665248, guid: 5051b71cccdab664ca3d377ca1b05e22, type: 2}
   - {fileID: 1805246559369872, guid: 5051b71cccdab664ca3d377ca1b05e22, type: 2}
   - {fileID: 1065343466828096, guid: 5051b71cccdab664ca3d377ca1b05e22, type: 2}
+  enemyCardSockets: []
+  preRoundTimer: {fileID: 0}
+  emptyCard: {fileID: 0}
   ID: 0
   didFire: 0
   ready: 0
@@ -120,7 +123,9 @@ MonoBehaviour:
   downLine: {fileID: 1726999697982118, guid: 039d5486bf288cc499c0bfb93d74b5e6, type: 2}
   waitBetweenAnimation: 1
   speed: 10
-  upLineStartPosition: {x: 0, y: 0, z: 0}
-  upLineEndPosition: {x: 0, y: 0, z: 0}
-  downLineStartPosition: {x: 0, y: 0, z: 0}
-  downLineEndPosition: {x: 0, y: 0, z: 0}
+  upLineStartPosition: {x: 0, y: 6, z: 0}
+  upLineEndPosition: {x: 0, y: 0.25, z: 0}
+  downLineStartPosition: {x: 0, y: -6, z: 0}
+  downLineEndPosition: {x: 0, y: -0.25, z: 0}
+  upLineMover: {fileID: 0}
+  downLineMover: {fileID: 0}
