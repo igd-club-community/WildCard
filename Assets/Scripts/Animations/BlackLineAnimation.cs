@@ -14,12 +14,20 @@ public class BlackLineAnimation : MonoBehaviour {
 	public Vector3 downLineStartPosition;
 	public Vector3 downLineEndPosition;
 
-	private BlackLine upLineMover;
-	private BlackLine downLineMover;
-	private void OnEnable()
+	public BlackLine upLineMover;
+	public BlackLine downLineMover;
+
+    private void Start()
+    {
+        upLine = GameObject.Find("blackLineUp");
+        downLine = GameObject.Find("blackLineDown");
+        upLineMover = upLine.GetComponent<BlackLine>();
+        downLineMover = downLine.GetComponent<BlackLine>();
+    }
+
+    private void OnEnable()
 	{
-		upLineMover = upLine.GetComponent<BlackLine>();
-		downLineMover = downLine.GetComponent<BlackLine>();
+		
 	}
 
 	public void doAnimation(){

@@ -16,9 +16,8 @@ public class GameController : NetworkBehaviour {
     public const float preRoundTime = 3;
     public GameObject preRoundTimer;
 
-
     private PlayerController player;
-    private EnemyController  enemy;
+    private EnemyController enemy;
 
     //for server interaction:
 
@@ -64,12 +63,11 @@ public class GameController : NetworkBehaviour {
     }
 
     [ClientRpc]
-    public void Rpc_StartRound()
+    public void Rpc_StartRound(int roundNumber)
     {
 
         if (isLocalPlayer)
         {
-
             Cmd_SetReady(false); //#TODO check is it need or not
             preRoundTimer.SetActive(true);
             preRoundTimer.GetComponent<Animator>().SetTrigger("StartTimer");
@@ -80,7 +78,7 @@ public class GameController : NetworkBehaviour {
             for (int i = 0; i < 4; i++)
             {
 
-               
+
                 int temp = Random.Range(0, (int)cardDesk.totalSum);
                 int index = 0;
                 uint sum = cardDesk.cardDesk[index]._chanceCoefficient;
@@ -95,11 +93,11 @@ public class GameController : NetworkBehaviour {
             Cmd_InitSelectedCards();
             for (int i = 0; i < 4; i++)
             {
-                
+
                 cardSockets[i].GetComponent<SpriteRenderer>().sprite = cardDesk.cardDesk[AvailableCards[i]]._NotSelectedImage;
             }
 
-            AudioSource audio = GetComponent<AudioSource>();
+            AudioSource audio = player.gameObject.GetComponent<AudioSource>();
             audio.Play();
         }
     }
@@ -125,27 +123,47 @@ public class GameController : NetworkBehaviour {
     }
 
 
-    
+
 
     [ClientRpc]
     public void Rpc_Animate(PlayerState player0State, PlayerState player1State)
     {
         if (isLocalPlayer)
+            StartCoroutine(Animate(player0State, player1State));
+
+    }
+
+    private IEnumerator Animate(PlayerState player0State, PlayerState player1State)
+    {
+        yield return AnimatePlayedCards();
+        yield return AnimateCharacters(player0State, player1State);
+    }
+
+    private IEnumerator AnimatePlayedCards()
+    {
+        BlackLineAnimation lineAnimations = GetComponent<BlackLineAnimation>();
+        lineAnimations.doAnimation();
+        yield return new WaitUntil(() => lineAnimations.upLineMover.lineDown);
+        //Show player and enemy cards
+        yield return new WaitForSeconds(lineAnimations.waitBetweenAnimation);
+        //Hide cards
+        yield return new WaitUntil(() => lineAnimations.upLineMover.lineUp);
+    }
+
+    private IEnumerator AnimateCharacters(PlayerState player0State, PlayerState player1State)
+    {
+        if (ID == 0)
         {
-            if (ID == 0)
-            {
 
-                player.SetState(player0State);
-                enemy.SetState(player1State);
-            }
-            else
-            {
-                player.SetState(player1State);
-                enemy.SetState(player0State);
-            }
-
+            player.SetState(player0State);
+            enemy.SetState(player1State);
         }
-
+        else
+        {
+            player.SetState(player1State);
+            enemy.SetState(player0State);
+        }
+        yield return new WaitForSeconds(5);
     }
 
     private void Start()
