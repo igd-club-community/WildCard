@@ -13,7 +13,9 @@ public class GameController : NetworkBehaviour {
     public int[] AvailableCards;
     public GameObject[] cardSockets;
 
-    
+    public const float preRoundTime = 3;
+    public GameObject preRoundTimer;
+
 
     private PlayerController player;
     private EnemyController  enemy;
@@ -54,12 +56,26 @@ public class GameController : NetworkBehaviour {
     }
 
 
+    IEnumerator DelayForTime(float time)
+    {
+        print(Time.time);
+        yield return new WaitForSeconds(time);
+        print(Time.time);
+    }
+
     [ClientRpc]
     public void Rpc_StartRound()
     {
+
         if (isLocalPlayer)
         {
-            Cmd_SetReady(false);
+
+            Cmd_SetReady(false); //#TODO check is it need or not
+            preRoundTimer.SetActive(true);
+            preRoundTimer.GetComponent<Animator>().SetTrigger("StartTimer");
+            StartCoroutine(DelayForTime(preRoundTime));
+            preRoundTimer.SetActive(false);
+            
             Debug.Log("Shuffle cards");
             for (int i = 0; i < 4; i++)
             {
@@ -136,7 +152,7 @@ public class GameController : NetworkBehaviour {
     {
         if (isLocalPlayer)
         {
-            
+            preRoundTimer = GameObject.Find("preRoundTimer");
             cardSockets = new GameObject[4];
             cardDesk = GameObject.Find("CardDesk").GetComponent<CardDesk>();
             for (int i = 0; i < 4; i++)
