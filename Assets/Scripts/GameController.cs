@@ -12,12 +12,16 @@ public class GameController : NetworkBehaviour {
     public CardDesk cardDesk;
     public int[] AvailableCards;
     public GameObject[] cardSockets;
+    public GameObject[] enemyCardSockets;
 
     public const float preRoundTime = 3;
     public GameObject preRoundTimer;
+    public const float charactersAnimationTime = 5;
 
     private PlayerController player;
     private EnemyController enemy;
+
+    public Card emptyCard;
 
     //for server interaction:
 
@@ -31,7 +35,7 @@ public class GameController : NetworkBehaviour {
     public SyncListInt SelectedCards = new SyncListInt();
 
     [SyncVar]
-    public SyncListInt EnemyCards = new SyncListInt();
+    public SyncListInt EnemySelectedCards = new SyncListInt();
 
     [SyncVar]
     public bool ready;
@@ -138,6 +142,7 @@ public class GameController : NetworkBehaviour {
     {
         yield return AnimatePlayedCards();
         yield return AnimateCharacters(player0State, player1State);
+        Cmd_SetReady(true); // I hope it would work
     }
 
     private IEnumerator AnimatePlayedCards()
@@ -145,10 +150,32 @@ public class GameController : NetworkBehaviour {
         BlackLineAnimation lineAnimations = GetComponent<BlackLineAnimation>();
         lineAnimations.doAnimation();
         yield return new WaitUntil(() => lineAnimations.upLineMover.lineDown);
-        //Show player and enemy cards
+        
+        for (int i=0; i<4; i++)
+        {
+            //for enemy
+            
+            if (EnemySelectedCards[i] != -1)
+                enemyCardSockets[i].GetComponent<SpriteRenderer>().sprite = cardDesk.cardDesk[EnemySelectedCards[i]]._SelectedImage; 
+            else
+                enemyCardSockets[i].GetComponent<SpriteRenderer>().sprite = emptyCard._SelectedImage;
+            enemyCardSockets[i].SetActive(true);
+
+            //for player
+            if (SelectedCards[i] != -1)
+                cardSockets[i].GetComponent<SpriteRenderer>().sprite = cardDesk.cardDesk[AvailableCards[i]]._SelectedImage;
+            else
+                cardSockets[i].GetComponent<SpriteRenderer>().sprite = emptyCard._SelectedImage;
+        }
+
+
+        
         yield return new WaitForSeconds(lineAnimations.waitBetweenAnimation);
-        //Hide cards
-        yield return new WaitUntil(() => lineAnimations.upLineMover.lineUp);
+        for (int i = 0; i < 4; i++)
+        {
+            enemyCardSockets[i].SetActive(false);
+        }
+            yield return new WaitUntil(() => lineAnimations.upLineMover.lineUp);
     }
 
     private IEnumerator AnimateCharacters(PlayerState player0State, PlayerState player1State)
@@ -164,19 +191,23 @@ public class GameController : NetworkBehaviour {
             player.SetState(player1State);
             enemy.SetState(player0State);
         }
-        yield return new WaitForSeconds(5);
+        yield return new WaitForSeconds(charactersAnimationTime);
+
     }
 
     private void Start()
     {
         if (isLocalPlayer)
         {
+
+
             preRoundTimer = GameObject.Find("preRoundTimer");
             cardSockets = new GameObject[4];
+            enemyCardSockets = new GameObject[4];
             cardDesk = GameObject.Find("CardDesk").GetComponent<CardDesk>();
             for (int i = 0; i < 4; i++)
             {
-
+                enemyCardSockets[i] = GameObject.Find("EnemyCardSockets").transform.GetChild(i).gameObject;
                 cardSockets[i] = GameObject.Find("CardSockets").transform.GetChild(i).gameObject;
             }
             Cmd_InitSelectedCards();
@@ -259,7 +290,7 @@ public class GameController : NetworkBehaviour {
         {
             int value = AvailableCards[index];
             Cmd_SetSelectedCard(index, value);
-            cardSockets[index].GetComponent<SpriteRenderer>().sprite = cardDesk.cardDesk[AvailableCards[index]]._SelectedImage;
+            cardSockets[index].GetComponent<SpriteRenderer>().sprite = cardDesk.cardDesk[value]._SelectedImage;
         }
         else
         {
