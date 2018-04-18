@@ -59,8 +59,7 @@ public class PlayerController : MonoBehaviour {
     void Update () 
     {
         GetPlayerInput();
-        if (animator.GetCurrentAnimatorStateInfo(0).IsName("Idle") && !gameController.ready)
-            gameController.Cmd_SetReady(true);
+      
     }
     
 

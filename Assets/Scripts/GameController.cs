@@ -16,6 +16,7 @@ public class GameController : NetworkBehaviour {
 
     public const float preRoundTime = 3;
     public GameObject preRoundTimer;
+    public const float charactersAnimationTime = 5;
 
     private PlayerController player;
     private EnemyController enemy;
@@ -141,6 +142,7 @@ public class GameController : NetworkBehaviour {
     {
         yield return AnimatePlayedCards();
         yield return AnimateCharacters(player0State, player1State);
+        Cmd_SetReady(true); // I hope it would work
     }
 
     private IEnumerator AnimatePlayedCards()
@@ -189,7 +191,8 @@ public class GameController : NetworkBehaviour {
             player.SetState(player1State);
             enemy.SetState(player0State);
         }
-        yield return new WaitForSeconds(5);
+        yield return new WaitForSeconds(charactersAnimationTime);
+
     }
 
     private void Start()
