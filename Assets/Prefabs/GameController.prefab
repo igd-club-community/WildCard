@@ -21,6 +21,7 @@ GameObject:
   - component: {fileID: 4706680530172734}
   - component: {fileID: 114143341572869570}
   - component: {fileID: 114845093451195636}
+  - component: {fileID: 114863537742435234}
   m_Layer: 0
   m_Name: GameController
   m_TagString: Untagged
@@ -104,3 +105,22 @@ MonoBehaviour:
   ready: 0
   health: 10
   _maxHealth: 10
+--- !u!114 &114863537742435234
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1217826836757414}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6e35090f40f0c2944a4ddfb41f18e52b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  upLine: {fileID: 1387612978283734, guid: bafb24470b91b7c40978c18f9e06dc6a, type: 2}
+  downLine: {fileID: 1726999697982118, guid: 039d5486bf288cc499c0bfb93d74b5e6, type: 2}
+  waitBetweenAnimation: 1
+  speed: 10
+  upLineStartPosition: {x: 0, y: 0, z: 0}
+  upLineEndPosition: {x: 0, y: 0, z: 0}
+  downLineStartPosition: {x: 0, y: 0, z: 0}
+  downLineEndPosition: {x: 0, y: 0, z: 0}

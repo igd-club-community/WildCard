@@ -12,6 +12,8 @@ public class BlackLine : MonoBehaviour {
 	private float distCovered;
 	private float fracJourney;
 	private bool needHide = false;
+    public bool lineDown = false;
+    public bool lineUp = true;
 
 	private void OnEnable()
 	{
@@ -22,6 +24,8 @@ public class BlackLine : MonoBehaviour {
 	{
 		if(Vector3.Distance(transform.position, endPosition) <= .1f)
 		{
+            lineDown = true;
+            lineUp = false;
 			StartCoroutine(ContinueAnimation());
 			needHide = true;
 		} 
@@ -31,6 +35,8 @@ public class BlackLine : MonoBehaviour {
         	fracJourney = distCovered / animationLength;
         	transform.position = Vector3.Lerp(startPositon, endPosition, fracJourney);
 		}
+        if (Vector3.Distance(transform.position, startPositon) <= .1f)
+            lineUp = true;
 	}
 
 	private void SetToStart()
