@@ -55,11 +55,37 @@ public class GameController : NetworkBehaviour {
     }
 
 
-    IEnumerator DelayForTime(float time)
+    IEnumerator StartRoundWithDelay(float time)
     {
-        print(Time.time);
         yield return new WaitForSeconds(time);
-        print(Time.time);
+
+        preRoundTimer.SetActive(false);
+
+        Debug.Log("Shuffle cards");
+        for (int i = 0; i < 4; i++)
+        {
+
+
+            int temp = Random.Range(0, (int)cardDesk.totalSum);
+            int index = 0;
+            uint sum = cardDesk.cardDesk[index]._chanceCoefficient;
+
+            while (sum < temp)
+            {
+                index++;
+                sum += cardDesk.cardDesk[index]._chanceCoefficient;
+            }
+            AvailableCards[i] = index;
+        }
+        Cmd_InitSelectedCards();
+        for (int i = 0; i < 4; i++)
+        {
+
+            cardSockets[i].GetComponent<SpriteRenderer>().sprite = cardDesk.cardDesk[AvailableCards[i]]._NotSelectedImage;
+        }
+
+        AudioSource audio = GetComponent<AudioSource>();
+        audio.Play();
     }
 
     [ClientRpc]
@@ -71,34 +97,9 @@ public class GameController : NetworkBehaviour {
             Cmd_SetReady(false); //#TODO check is it need or not
             preRoundTimer.SetActive(true);
             preRoundTimer.GetComponent<Animator>().SetTrigger("StartTimer");
-            StartCoroutine(DelayForTime(preRoundTime));
-            preRoundTimer.SetActive(false);
-            
-            Debug.Log("Shuffle cards");
-            for (int i = 0; i < 4; i++)
-            {
+            StartCoroutine(StartRoundWithDelay(preRoundTime));
+           
 
-
-                int temp = Random.Range(0, (int)cardDesk.totalSum);
-                int index = 0;
-                uint sum = cardDesk.cardDesk[index]._chanceCoefficient;
-
-                while (sum < temp)
-                {
-                    index++;
-                    sum += cardDesk.cardDesk[index]._chanceCoefficient;
-                }
-                AvailableCards[i] = index;
-            }
-            Cmd_InitSelectedCards();
-            for (int i = 0; i < 4; i++)
-            {
-
-                cardSockets[i].GetComponent<SpriteRenderer>().sprite = cardDesk.cardDesk[AvailableCards[i]]._NotSelectedImage;
-            }
-
-            AudioSource audio = player.gameObject.GetComponent<AudioSource>();
-            audio.Play();
         }
     }
 
