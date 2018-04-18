@@ -52,9 +52,9 @@ public class ServerBehaviour : NetworkBehaviour
         {
             GameController player = players[i].GetComponent<GameController>();
             player.ready = false;
-            player.EnemyCards.Clear();
+            player.EnemySelectedCards.Clear();
             foreach(int card in players[1 - i].GetComponent<GameController>().SelectedCards){
-                player.EnemyCards.Add(card);
+                player.EnemySelectedCards.Add(card);
             }
             player.Rpc_Animate(nextStates[0], nextStates[1]);
         }
