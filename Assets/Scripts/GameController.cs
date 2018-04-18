@@ -55,12 +55,12 @@ public class GameController : NetworkBehaviour {
 
 
     [ClientRpc]
-    public void Rpc_StartRound()
+    public void Rpc_StartRound(int roundNumber)
     {
         if (isLocalPlayer)
         {
             Cmd_SetReady(false);
-            Debug.Log("Shuffle cards");
+            Debug.Log("Round number: " + roundNumber.ToString());
             for (int i = 0; i < 4; i++)
             {
 
@@ -83,7 +83,7 @@ public class GameController : NetworkBehaviour {
                 cardSockets[i].GetComponent<SpriteRenderer>().sprite = cardDesk.cardDesk[AvailableCards[i]]._NotSelectedImage;
             }
 
-            AudioSource audio = GetComponent<AudioSource>();
+            AudioSource audio = player.gameObject.GetComponent<AudioSource>();
             audio.Play();
         }
     }

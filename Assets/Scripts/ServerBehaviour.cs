@@ -8,6 +8,7 @@ public class ServerBehaviour : NetworkBehaviour
     public const double roundTime = 10;
     public double endTime;
     public State state = State.Connecting;
+    public int roundNumber = 0;
 
     private struct PlayerActionStruct
     {
@@ -32,6 +33,7 @@ public class ServerBehaviour : NetworkBehaviour
     {
         state = State.Round;
         endTime = Time.fixedTime + roundTime;
+        Debug.Log("Starting Round");
         StartPlayerRound(players[0]);
         StartPlayerRound(players[1]);
     }
@@ -40,7 +42,7 @@ public class ServerBehaviour : NetworkBehaviour
     {
         player.GetComponent<GameController>().ready = false;
         player.GetComponent<GameController>().didFire = false;
-        player.GetComponent<GameController>().Rpc_StartRound();
+        player.GetComponent<GameController>().Rpc_StartRound(roundNumber++);
     }
 
     public void Animate(PlayerState[] nextStates)
