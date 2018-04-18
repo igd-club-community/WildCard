@@ -33,7 +33,7 @@ public class BlackLineAnimation : MonoBehaviour {
 	public void doAnimation(){
 		upLineMover.SetInternals(speed, waitBetweenAnimation, upLineStartPosition, upLineEndPosition);
 		downLineMover.SetInternals(speed, waitBetweenAnimation, downLineStartPosition, downLineEndPosition);
-		upLine.SetActive(true);
-		downLine.SetActive(true);
-	}
+		upLineMover.Enable();
+        downLineMover.Enable();
+    }
 }

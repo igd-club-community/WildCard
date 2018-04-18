@@ -14,14 +14,18 @@ public class BlackLine : MonoBehaviour {
 	private bool needHide = false;
     public bool lineDown = false;
     public bool lineUp = true;
+    public bool active = false;
 
-	private void OnEnable()
+	public void Enable()
 	{
+        active = true;
 		SetToStart();
 	}
 
 	private void Update()
 	{
+        if (!active)
+            return;
 		if(Vector3.Distance(transform.position, endPosition) <= .1f)
 		{
             lineDown = true;
