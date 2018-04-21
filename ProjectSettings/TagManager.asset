@@ -57,3 +57,9 @@ TagManager:
   - name: Buttons
     uniqueID: 2428287031
     locked: 0
+  - name: TutorialSprite
+    uniqueID: 2252758109
+    locked: 0
+  - name: MenuSprite
+    uniqueID: 2474106655
+    locked: 0
