@@ -314,17 +314,21 @@ public class GameController : NetworkBehaviour {
 
     public void SetSelectedCard(int index)
     {
+        
         if (SelectedCards[index] == -1)
         {
             int value = AvailableCards[index];
             Cmd_SetSelectedCard(index, value);
-            cardSockets[index].GetComponent<SpriteRenderer>().sprite = cardDesk.cardDesk[value]._SelectedImage;
+            if(SelectedCards[index] == value)
+                cardSockets[index].GetComponent<SpriteRenderer>().sprite = cardDesk.cardDesk[value]._SelectedImage;
+            
         }
         else
         {
             SelectedCards[index] = -1;
             Cmd_SetSelectedCard(index, -1);
-            cardSockets[index].GetComponent<SpriteRenderer>().sprite = cardDesk.cardDesk[AvailableCards[index]]._NotSelectedImage;
+            if (SelectedCards[index] == -1)
+                cardSockets[index].GetComponent<SpriteRenderer>().sprite = cardDesk.cardDesk[AvailableCards[index]]._NotSelectedImage;
         }
 
     }
@@ -332,8 +336,10 @@ public class GameController : NetworkBehaviour {
     [Command]
     public void Cmd_SetSelectedCard(int index, int value)
     {
-       
-        SelectedCards[index] = value;
+        if (GameObject.Find("GameServer").GetComponent<ServerBehaviour>().state == ServerBehaviour.State.Round)
+        {
+            SelectedCards[index] = value;
+        }
     }
 
     [Command]
