@@ -203,11 +203,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   upLine: {fileID: 1387612978283734, guid: bafb24470b91b7c40978c18f9e06dc6a, type: 2}
   downLine: {fileID: 1726999697982118, guid: 039d5486bf288cc499c0bfb93d74b5e6, type: 2}
-  waitBetweenAnimation: 1
+  waitBetweenAnimation: 3
+  waitForMovement: 3
   speed: 10
-  upLineStartPosition: {x: 0, y: 6, z: 0}
+  upLineStartPosition: {x: 0, y: 11, z: 0}
   upLineEndPosition: {x: 0, y: 0.25, z: 0}
   downLineStartPosition: {x: 0, y: -6, z: 0}
-  downLineEndPosition: {x: 0, y: -0.25, z: 0}
+  downLineEndPosition: {x: 0, y: -11, z: 0}
   upLineMover: {fileID: 0}
   downLineMover: {fileID: 0}

@@ -13,11 +13,21 @@ public class BlackLine : MonoBehaviour {
 	private float fracJourney;
 	private bool needHide = false;
     public bool active = false;
+    public State state
+    {
+        get;
+        private set;
+    }
+
+    public enum State
+    {
+        Moving, Down, Up
+    }
 
 	public void Enable()
 	{
+        SetToStart();
         active = true;
-		SetToStart();
 	}
 
 	private void Update()
@@ -26,8 +36,7 @@ public class BlackLine : MonoBehaviour {
             return;
 		if(Mathf.Abs(Vector3.Distance(transform.position, endPosition)) <= .1f)
 		{
-			StartCoroutine(ContinueAnimation());
-			needHide = true;
+            StartCoroutine(ContinueAnimation());
 		} 
 		else 
 		{
@@ -42,6 +51,7 @@ public class BlackLine : MonoBehaviour {
 		transform.position.Set(startPositon.x, startPositon.y, startPositon.z);
 		startTime = Time.time;
 		animationLength = Vector3.Distance(startPositon, endPosition);
+        state = State.Moving;
 	}
 
 	public void SetInternals(float speed, float animationPause,Vector3 startPositon, Vector3 endPosition)
@@ -54,18 +64,20 @@ public class BlackLine : MonoBehaviour {
 
 	private IEnumerator ContinueAnimation()
 	{
-		if(!needHide)
-		{
-			yield return new WaitForSeconds(animationPause);
-			endPosition += startPositon - endPosition;
-			startPositon.Set(transform.position.x, transform.position.y, transform.position.z);
-			SetToStart();
-		}
-	}
-	private void OnBecameInvisible()
-	{
-		if(needHide){
+        if (!needHide)
+        {
+            state = State.Down;
+            yield return new WaitForSeconds(animationPause);
+            state = State.Moving;
+            endPosition += startPositon - endPosition;
+            startPositon.Set(transform.position.x, transform.position.y, transform.position.z);
+            SetToStart();
+            needHide = true;
+        }
+        else
+        {
             active = false;
-		}
-	}
+            state = State.Up;
+        }
+    }
 }
