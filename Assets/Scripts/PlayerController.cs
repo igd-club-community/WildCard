@@ -44,6 +44,9 @@ public class PlayerController : MonoBehaviour {
             case PlayerState.Dead:
                 animator.SetTrigger("Died");
                 break;
+            case PlayerState.Shooting:
+                animator.SetTrigger("AttemptShoot");
+                break;
         }
     }
 
