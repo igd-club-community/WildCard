@@ -163,7 +163,7 @@ public class GameController : NetworkBehaviour {
         }
         else
         {
-            eftHPBar.GetComponent<SpriteRenderer>().sprite = hpBarSprites[enemyHealth];
+            leftHPBar.GetComponent<SpriteRenderer>().sprite = hpBarSprites[enemyHealth];
             rightHPBar.GetComponent<SpriteRenderer>().sprite = hpBarSprites[health];
         }
         yield return AnimateCharacters(player0State, player1State);
