@@ -150,7 +150,7 @@ public class GameController : NetworkBehaviour {
 
     private IEnumerator AnimateShoot(int shooterID)
     {
-        yield return new WaitForSeconds(2);
+        
         if (ID == shooterID)
         {
             player.SetState(PlayerState.Shooting);
@@ -166,6 +166,7 @@ public class GameController : NetworkBehaviour {
             player.SetState(PlayerState.Dodge);
             enemy.SetState(PlayerState.Shooting);
         }
+        yield return new WaitForSeconds(2);
 
     }
 
