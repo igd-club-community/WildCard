@@ -349,7 +349,7 @@ public class GameController : NetworkBehaviour {
         if (server.state == ServerBehaviour.State.Round)
         {
             didFire = true;
-            server.FinishRound();
+            server.FinishRound(ID);
             
         }
     }
