@@ -182,6 +182,17 @@ MonoBehaviour:
   - {fileID: 1805246559369872, guid: 5051b71cccdab664ca3d377ca1b05e22, type: 2}
   - {fileID: 1065343466828096, guid: 5051b71cccdab664ca3d377ca1b05e22, type: 2}
   enemyCardSockets: []
+  hpBars:
+  - {fileID: 21300000, guid: ea031929bef141248ae09d89dfd8d25a, type: 3}
+  - {fileID: 21300000, guid: d27276b53bdfc5049a59150e94ee60f6, type: 3}
+  - {fileID: 21300000, guid: 39b5dd355283374499bdb621d6d847d2, type: 3}
+  - {fileID: 21300000, guid: 9e63e302640b3044b9095ce743c34d6e, type: 3}
+  - {fileID: 21300000, guid: 3f4a75e3ec2c2654c8ff60f3fa8d3491, type: 3}
+  - {fileID: 21300000, guid: 0fdf06d2aaae7db44b29324f46ea7df2, type: 3}
+  - {fileID: 21300000, guid: 78d1126c05ee45d48a12e41fcca8d9fd, type: 3}
+  - {fileID: 21300000, guid: edf2e6c904b378b4d8bb5783fc0b01aa, type: 3}
+  leftHPBar: {fileID: 0}
+  rightHPBar: {fileID: 0}
   enemyCardSocketsObject: {fileID: 0}
   preRoundTimer: {fileID: 0}
   emptyCard: {fileID: 0}
@@ -189,6 +200,7 @@ MonoBehaviour:
   didFire: 0
   ready: 0
   health: 10
+  enemyHealth: 0
   _maxHealth: 10
 --- !u!114 &114863537742435234
 MonoBehaviour:

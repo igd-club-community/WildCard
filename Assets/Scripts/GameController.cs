@@ -14,6 +14,14 @@ public class GameController : NetworkBehaviour {
     public GameObject[] cardSockets;
     public GameObject[] enemyCardSockets;
 
+    public Sprite[] hpBarSprites;
+    
+    public GameObject leftHPBar;
+    public GameObject rightHPBar;
+
+
+
+
     public GameObject enemyCardSocketsObject;
 
     public const float preRoundTime = 3;
@@ -44,6 +52,9 @@ public class GameController : NetworkBehaviour {
 
     [SyncVar]
     public int health;
+
+    [SyncVar]
+    public int enemyHealth;
 
     [SyncVar]
     public int _maxHealth;
@@ -142,8 +153,19 @@ public class GameController : NetworkBehaviour {
 
     private IEnumerator Animate(PlayerState player0State, PlayerState player1State, int shooterID)
     {
+
         yield return AnimatePlayedCards();
         yield return AnimateShoot(shooterID);
+        if (ID == 0)
+        {
+            leftHPBar.GetComponent<SpriteRenderer>().sprite = hpBarSprites[health];
+            rightHPBar.GetComponent<SpriteRenderer>().sprite = hpBarSprites[enemyHealth];
+        }
+        else
+        {
+            eftHPBar.GetComponent<SpriteRenderer>().sprite = hpBarSprites[enemyHealth];
+            rightHPBar.GetComponent<SpriteRenderer>().sprite = hpBarSprites[health];
+        }
         yield return AnimateCharacters(player0State, player1State);
         Cmd_SetReady(true); // I hope it would work
     }
@@ -225,7 +247,8 @@ public class GameController : NetworkBehaviour {
     {
         if (isLocalPlayer)
         {
-
+            leftHPBar = GameObject.Find("leftHPBar");
+            rightHPBar = GameObject.Find("rightHPBar");
             emptyCard = Resources.Load<Card>("EmptyCard");
             preRoundTimer = GameObject.Find("preRoundTimer");
             cardSockets = new GameObject[4];
