@@ -155,11 +155,10 @@ public class ServerBehaviour : NetworkBehaviour
                     winner = 0;
                 if (players[1].GetComponent<GameController>().health > 0)
                     winner = 1;
-                state = State.Start;
                 foreach (GameObject player in players)
                 {
-                    player.GetComponent<GameController>().Rpc_Finish(winner);
                     player.GetComponent<GameController>().ready = false;
+                    player.GetComponent<GameController>().Rpc_Finish(winner);
                 }
             }
             Debug.Log(state);
