@@ -160,14 +160,14 @@ public class GameController : NetworkBehaviour {
             if (EnemySelectedCards[i] != -1)
                 enemyCardSockets[i].GetComponent<SpriteRenderer>().sprite = cardDesk.cardDesk[EnemySelectedCards[i]]._SelectedImage;
             else
-                enemyCardSockets[i].GetComponent<SpriteRenderer>().enabled = false;
+                enemyCardSockets[i].GetComponent<SpriteRenderer>().sprite = emptyCard._SelectedImage;
 
             cardSockets[i].GetComponent<SpriteRenderer>().enabled = true;
             //for player
             if (SelectedCards[i] != -1)
                 cardSockets[i].GetComponent<SpriteRenderer>().sprite = cardDesk.cardDesk[AvailableCards[i]]._SelectedImage;
             else
-                cardSockets[i].GetComponent<SpriteRenderer>().enabled = false;
+                cardSockets[i].GetComponent<SpriteRenderer>().sprite = emptyCard._SelectedImage;
         }
 
 

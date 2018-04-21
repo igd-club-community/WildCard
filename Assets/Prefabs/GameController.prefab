@@ -206,9 +206,5 @@ MonoBehaviour:
   waitBetweenAnimation: 3
   waitForMovement: 3
   speed: 10
-  upLineStartPosition: {x: 0, y: 11, z: 0}
-  upLineEndPosition: {x: 0, y: 0.25, z: 0}
-  downLineStartPosition: {x: 0, y: -0.25, z: 0}
-  downLineEndPosition: {x: 0, y: -11, z: 0}
-  upLineMover: {fileID: 0}
-  downLineMover: {fileID: 0}
+  startMarker: {x: 0, y: 11, z: 0}
+  endMarker: {x: 0, y: 0.25, z: 0}
