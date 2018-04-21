@@ -156,28 +156,29 @@ public class GameController : NetworkBehaviour {
         for (int i=0; i<4; i++)
         {
             //for enemy
-            
-            
-            if (EnemySelectedCards[i] != -1)
-                enemyCardSockets[i].GetComponent<SpriteRenderer>().sprite = cardDesk.cardDesk[EnemySelectedCards[i]]._SelectedImage; 
-            else
-                enemyCardSockets[i].GetComponent<SpriteRenderer>().sprite = emptyCard._SelectedImage;
-            
+            enemyCardSockets[i].GetComponent<SpriteRenderer>().enabled = true;
 
+            if (EnemySelectedCards[i] != -1)
+                enemyCardSockets[i].GetComponent<SpriteRenderer>().sprite = cardDesk.cardDesk[EnemySelectedCards[i]]._SelectedImage;
+            else
+                enemyCardSockets[i].GetComponent<SpriteRenderer>().enabled = false;
+
+            cardSockets[i].GetComponent<SpriteRenderer>().enabled = true;
             //for player
             if (SelectedCards[i] != -1)
                 cardSockets[i].GetComponent<SpriteRenderer>().sprite = cardDesk.cardDesk[AvailableCards[i]]._SelectedImage;
             else
-                cardSockets[i].GetComponent<SpriteRenderer>().sprite = emptyCard._SelectedImage;
+                cardSockets[i].GetComponent<SpriteRenderer>().enabled = false;
         }
 
 
         
         yield return new WaitForSeconds(lineAnimations.waitBetweenAnimation);
-        for (int i = 0; i < 4; i++)
-        {
-            enemyCardSockets[i].SetActive(false);
-        }
+        enemyCardSocketsObject.SetActive(false);
+        //for (int i = 0; i < 4; i++)
+        //{
+        //    enemyCardSockets[i].SetActive(false);
+        //}
             yield return new WaitUntil(() => lineAnimations.upLineMover.lineUp);
     }
 
