@@ -53,7 +53,8 @@ public class ServerBehaviour : NetworkBehaviour
             GameController player = players[i].GetComponent<GameController>();
             player.ready = false;
             player.EnemySelectedCards.Clear();
-            foreach(int card in players[1 - i].GetComponent<GameController>().SelectedCards){
+            player.enemyHealth = players[1 - i].GetComponent<GameController>().health;
+            foreach (int card in players[1 - i].GetComponent<GameController>().SelectedCards){
                 player.EnemySelectedCards.Add(card);
             }
             player.Rpc_Animate(nextStates[0], nextStates[1], shooterID);
