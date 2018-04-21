@@ -203,7 +203,7 @@ public class GameController : NetworkBehaviour {
         if (isLocalPlayer)
         {
 
-
+            emptyCard = Resources.Load<Card>("EmptyCard");
             preRoundTimer = GameObject.Find("preRoundTimer");
             cardSockets = new GameObject[4];
             enemyCardSockets = new GameObject[4];
