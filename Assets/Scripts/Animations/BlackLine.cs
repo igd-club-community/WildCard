@@ -32,7 +32,7 @@ public class BlackLine : MonoBehaviour {
 
 	private void Update()
 	{
-        if (!active)
+        if (!active || state != State.Moving)
             return;
 		if(Mathf.Abs(Vector3.Distance(transform.position, endPosition)) <= .1f)
 		{

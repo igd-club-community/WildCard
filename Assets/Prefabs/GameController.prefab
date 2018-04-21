@@ -208,7 +208,7 @@ MonoBehaviour:
   speed: 10
   upLineStartPosition: {x: 0, y: 11, z: 0}
   upLineEndPosition: {x: 0, y: 0.25, z: 0}
-  downLineStartPosition: {x: 0, y: -6, z: 0}
+  downLineStartPosition: {x: 0, y: -0.25, z: 0}
   downLineEndPosition: {x: 0, y: -11, z: 0}
   upLineMover: {fileID: 0}
   downLineMover: {fileID: 0}
