@@ -182,7 +182,7 @@ MonoBehaviour:
   - {fileID: 1805246559369872, guid: 5051b71cccdab664ca3d377ca1b05e22, type: 2}
   - {fileID: 1065343466828096, guid: 5051b71cccdab664ca3d377ca1b05e22, type: 2}
   enemyCardSockets: []
-  hpBars:
+  hpBarSprites:
   - {fileID: 21300000, guid: ea031929bef141248ae09d89dfd8d25a, type: 3}
   - {fileID: 21300000, guid: d27276b53bdfc5049a59150e94ee60f6, type: 3}
   - {fileID: 21300000, guid: 39b5dd355283374499bdb621d6d847d2, type: 3}
