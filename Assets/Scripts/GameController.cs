@@ -179,7 +179,7 @@ public class GameController : NetworkBehaviour {
         //{
         //    enemyCardSockets[i].SetActive(false);
         //}
-            yield return new WaitForSeconds(lineAnimations.waitForMovement);
+        yield return new WaitForSeconds(lineAnimations.waitForMovement);
     }
 
     private IEnumerator AnimateCharacters(PlayerState player0State, PlayerState player1State)

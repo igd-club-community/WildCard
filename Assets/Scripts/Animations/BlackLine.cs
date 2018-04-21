@@ -65,7 +65,7 @@ public class BlackLine : MonoBehaviour {
 	private void OnBecameInvisible()
 	{
 		if(needHide){
-			this.gameObject.SetActive(false);
+            active = false;
 		}
 	}
 }
