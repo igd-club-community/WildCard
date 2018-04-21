@@ -6,4 +6,5 @@ public enum PlayerState
     Bleeding,
     Healing,
     Dead,
+    Dodge
 }

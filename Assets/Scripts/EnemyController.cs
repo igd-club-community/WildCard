@@ -42,6 +42,9 @@ public class EnemyController : MonoBehaviour {
             case PlayerState.Shooting:
                 animator.SetTrigger("AttemptShoot");
                 break;
+            case PlayerState.Dodge:
+                animator.SetTrigger("AttemptDodge");
+                break;
         }
     }
 

@@ -133,18 +133,40 @@ public class GameController : NetworkBehaviour {
 
 
     [ClientRpc]
-    public void Rpc_Animate(PlayerState player0State, PlayerState player1State)
+    public void Rpc_Animate(PlayerState player0State, PlayerState player1State, int shooterID)
     {
         if (isLocalPlayer)
-            StartCoroutine(Animate(player0State, player1State));
+            StartCoroutine(Animate(player0State, player1State, shooterID));
 
     }
 
-    private IEnumerator Animate(PlayerState player0State, PlayerState player1State)
+    private IEnumerator Animate(PlayerState player0State, PlayerState player1State, int shooterID)
     {
         yield return AnimatePlayedCards();
+        yield return AnimateShoot(shooterID);
         yield return AnimateCharacters(player0State, player1State);
         Cmd_SetReady(true); // I hope it would work
+    }
+
+    private IEnumerator AnimateShoot(int shooterID)
+    {
+        yield return new WaitForSeconds(2);
+        if (ID == shooterID)
+        {
+            player.SetState(PlayerState.Shooting);
+            enemy.SetState(PlayerState.Dodge);
+        }
+        else if(ID == -1)
+        {
+            player.SetState(PlayerState.Shooting);
+            enemy.SetState(PlayerState.Shooting);
+        }
+        else
+        {
+            player.SetState(PlayerState.Dodge);
+            enemy.SetState(PlayerState.Shooting);
+        }
+
     }
 
     private IEnumerator AnimatePlayedCards()
