@@ -10,31 +10,33 @@ public class BlackLineAnimation : MonoBehaviour {
     public float waitForMovement = 4f;
     public float speed = 10f;
 	
-	public Vector3 upLineStartPosition;
-	public Vector3 upLineEndPosition;
-	public Vector3 downLineStartPosition;
-	public Vector3 downLineEndPosition;
-
-	public BlackLine upLineMover;
-	public BlackLine downLineMover;
+	public Vector3 startMarker;
+	public Vector3 endMarker;
 
     private void Start()
     {
         upLine = GameObject.Find("blackLineUp");
         downLine = GameObject.Find("blackLineDown");
-        upLineMover = upLine.GetComponent<BlackLine>();
-        downLineMover = downLine.GetComponent<BlackLine>();
     }
 
-    private void OnEnable()
-	{
-		
-	}
-
-	public void doAnimation(){
-		upLineMover.SetInternals(speed, waitBetweenAnimation, upLineStartPosition, upLineEndPosition);
-		downLineMover.SetInternals(speed, waitBetweenAnimation, downLineStartPosition, downLineEndPosition);
-		upLineMover.Enable();
-        downLineMover.Enable();
+	public IEnumerator Animate(bool close){
+        float startTime = Time.time;
+        float journeyLength = Vector3.Distance(startMarker, endMarker);
+        float fracJourney = 0;
+        while (fracJourney < 0.99) {
+            float distCovered = (Time.time - startTime) * speed;
+            fracJourney = distCovered / journeyLength;
+            if (close)
+            {
+                upLine.transform.position = Vector3.Lerp(startMarker, endMarker, fracJourney);
+                downLine.transform.position = Vector3.Lerp(-startMarker, -endMarker, fracJourney);
+            }
+            else
+            {
+                upLine.transform.position = Vector3.Lerp(endMarker, startMarker, fracJourney);
+                downLine.transform.position = Vector3.Lerp(-endMarker, -startMarker, fracJourney);
+            }
+            yield return null;
+        }
     }
 }

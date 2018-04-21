@@ -150,8 +150,7 @@ public class GameController : NetworkBehaviour {
     private IEnumerator AnimatePlayedCards()
     {
         BlackLineAnimation lineAnimations = GetComponent<BlackLineAnimation>();
-        lineAnimations.doAnimation();
-        yield return new WaitWhile(() => lineAnimations.upLineMover.state == BlackLine.State.Moving);
+        yield return lineAnimations.Animate(true);
         enemyCardSocketsObject.SetActive(true);
         for (int i=0; i<4; i++)
         {
@@ -179,7 +178,7 @@ public class GameController : NetworkBehaviour {
         //{
         //    enemyCardSockets[i].SetActive(false);
         //}
-        yield return new WaitWhile(() => lineAnimations.upLineMover.state == BlackLine.State.Moving);
+        yield return lineAnimations.Animate(false);
     }
 
     private IEnumerator AnimateCharacters(PlayerState player0State, PlayerState player1State)
