@@ -14,6 +14,8 @@ public class GameController : NetworkBehaviour {
     public GameObject[] cardSockets;
     public GameObject[] enemyCardSockets;
 
+    public GameObject enemyCardSocketsObject;
+
     public const float preRoundTime = 3;
     public GameObject preRoundTimer;
     public const float charactersAnimationTime = 5;
@@ -149,8 +151,8 @@ public class GameController : NetworkBehaviour {
     {
         BlackLineAnimation lineAnimations = GetComponent<BlackLineAnimation>();
         lineAnimations.doAnimation();
-        yield return new WaitUntil(() => lineAnimations.upLineMover.lineDown);
-        GameObject.Find("EnemyCardSockets").SetActive(true);
+        yield return new WaitUntil(() => lineAnimations.upLineMover.lWineDown);
+        enemyCardSocketsObject.SetActive(false);
         for (int i=0; i<4; i++)
         {
             //for enemy
@@ -211,7 +213,8 @@ public class GameController : NetworkBehaviour {
                 enemyCardSockets[i] = GameObject.Find("EnemyCardSockets").transform.GetChild(i).gameObject;
                 cardSockets[i] = GameObject.Find("CardSockets").transform.GetChild(i).gameObject;
             }
-            GameObject.Find("EnemyCardSockets").SetActive(false);
+            enemyCardSocketsObject = GameObject.Find("EnemyCardSockets");
+            enemyCardSocketsObject.SetActive(false);
             Cmd_InitSelectedCards();
             AvailableCards = new int[4];
 
