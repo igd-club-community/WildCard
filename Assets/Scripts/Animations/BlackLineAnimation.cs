@@ -7,7 +7,8 @@ public class BlackLineAnimation : MonoBehaviour {
 	public GameObject upLine;
 	public GameObject downLine;
 	public float waitBetweenAnimation = 1f;
-	public float speed = 10f;
+    public float waitForMovement = 3f;
+    public float speed = 10f;
 	
 	public Vector3 upLineStartPosition;
 	public Vector3 upLineEndPosition;
