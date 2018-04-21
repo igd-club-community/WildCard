@@ -41,6 +41,9 @@ public class PlayerController : MonoBehaviour {
             case PlayerState.Healing:
                 animator.SetTrigger("WasHealed");
                 break;
+            case PlayerState.Dead:
+                animator.SetTrigger("Died");
+                break;
         }
     }
 
