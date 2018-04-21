@@ -210,6 +210,7 @@ public class GameController : NetworkBehaviour {
                 enemyCardSockets[i] = GameObject.Find("EnemyCardSockets").transform.GetChild(i).gameObject;
                 cardSockets[i] = GameObject.Find("CardSockets").transform.GetChild(i).gameObject;
             }
+            GameObject.Find("EnemyCardSockets").SetActive(false);
             Cmd_InitSelectedCards();
             AvailableCards = new int[4];
 
