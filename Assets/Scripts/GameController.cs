@@ -329,7 +329,7 @@ public class GameController : NetworkBehaviour {
         {
             didFire = true;
             server.FinishRound();
-            Cmd_InitSelectedCards();
+            
         }
     }
 
