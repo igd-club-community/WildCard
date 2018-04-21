@@ -45,7 +45,7 @@ public class ServerBehaviour : NetworkBehaviour
         player.GetComponent<GameController>().Rpc_StartRound(roundNumber++);
     }
 
-    public void Animate(PlayerState[] nextStates)
+    public void Animate(PlayerState[] nextStates, int shooterID)
     {
         state = State.Animation;
         for (int i = 0; i < players.Count; i++)
@@ -56,7 +56,7 @@ public class ServerBehaviour : NetworkBehaviour
             foreach(int card in players[1 - i].GetComponent<GameController>().SelectedCards){
                 player.EnemySelectedCards.Add(card);
             }
-            player.Rpc_Animate(nextStates[0], nextStates[1]);
+            player.Rpc_Animate(nextStates[0], nextStates[1], shooterID);
         }
     }
 
@@ -110,14 +110,14 @@ public class ServerBehaviour : NetworkBehaviour
         return playerStates;
     }
 
-    public void FinishRound()
+    public void FinishRound(int shooterID)
     {
         Debug.Log("Finishing round");
         if (state.Equals(State.Round))
         {
             PlayerState[] nextStates = ApplyActions();
             if (players[0].GetComponent<GameController>().health>0 && players[1].GetComponent<GameController>().health>0)
-                Animate(nextStates);
+                Animate(nextStates, shooterID);
             else
                 state = State.Finish;
         }
@@ -144,7 +144,7 @@ public class ServerBehaviour : NetworkBehaviour
             {
                 if (endTime < Time.fixedTime)
                 {
-                    FinishRound();
+                    FinishRound(-1);
                 }
             }
             else if (state.Equals(State.Finish) && !isFinished)
