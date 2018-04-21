@@ -299,11 +299,13 @@ public class GameController : NetworkBehaviour {
                     {
                         player.SetState(PlayerState.Idle);
                         enemy.SetState(PlayerState.Dead);
+                        rightHPBar.GetComponent<SpriteRenderer>().sprite = hpBarSprites[0];
                     }
                     else
                     {
                         enemy.SetState(PlayerState.Idle);
                         player.SetState(PlayerState.Dead);
+                        leftHPBar.GetComponent<SpriteRenderer>().sprite = hpBarSprites[0];
                     }
                     break;
                 case 1:
@@ -311,16 +313,20 @@ public class GameController : NetworkBehaviour {
                     {
                         player.SetState(PlayerState.Idle);
                         enemy.SetState(PlayerState.Dead);
+                        leftHPBar.GetComponent<SpriteRenderer>().sprite = hpBarSprites[0];
                     }
                     else
                     {
                         enemy.SetState(PlayerState.Idle);
                         player.SetState(PlayerState.Dead);
+                        rightHPBar.GetComponent<SpriteRenderer>().sprite = hpBarSprites[0];
                     }
                     break;
                 case -1:
                     player.SetState(PlayerState.Dead);
                     enemy.SetState(PlayerState.Dead);
+                    rightHPBar.GetComponent<SpriteRenderer>().sprite = hpBarSprites[0];
+                    leftHPBar.GetComponent<SpriteRenderer>().sprite = hpBarSprites[0];
                     break;
             }
         }
