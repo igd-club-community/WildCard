@@ -152,9 +152,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameController: {fileID: 0}
-  health: 10
+  health: 7
   playerState: 0
-  _maxHealth: 10
+  _maxHealth: 7
 --- !u!212 &212987212534966498
 SpriteRenderer:
   m_ObjectHideFlags: 1
