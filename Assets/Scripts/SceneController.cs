@@ -11,6 +11,7 @@ public class SceneController : MonoBehaviour {
     private int defaultPort = 1337;
 
     public GameObject canvasUI;
+    public GameObject menuSprite;
     public GameObject tutorialSprite;
     public GameObject finishSprite;
 
@@ -41,6 +42,7 @@ public class SceneController : MonoBehaviour {
 
     public void ShowTutorial()
     {
+        menuSprite.SetActive(false);
         currentState = SceneStates.Tutorial;
         StartButton.SetActive(false);
         SettingsButton.SetActive(false);
@@ -50,6 +52,7 @@ public class SceneController : MonoBehaviour {
 
     public void StartGame()
     {
+      
         cardSockets.SetActive(true);
         currentState = SceneStates.Game;
         tutorialSprite.SetActive(false);
