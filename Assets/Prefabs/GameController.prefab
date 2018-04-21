@@ -199,9 +199,9 @@ MonoBehaviour:
   ID: 0
   didFire: 0
   ready: 0
-  health: 10
-  enemyHealth: 0
-  _maxHealth: 10
+  health: 7
+  enemyHealth: 7
+  _maxHealth: 7
 --- !u!114 &114863537742435234
 MonoBehaviour:
   m_ObjectHideFlags: 1
