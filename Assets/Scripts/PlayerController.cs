@@ -14,7 +14,7 @@ public class PlayerController : MonoBehaviour {
     public int health;
 
     public PlayerState playerState;
-    public int _maxHealth = 10;
+    public int _maxHealth = 7;
 
     public bool isAlive
     {
