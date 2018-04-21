@@ -151,13 +151,13 @@ public class GameController : NetworkBehaviour {
     {
         BlackLineAnimation lineAnimations = GetComponent<BlackLineAnimation>();
         lineAnimations.doAnimation();
-        yield return new WaitUntil(() => lineAnimations.upLineMover.lWineDown);
-        enemyCardSocketsObject.SetActive(false);
+        yield return new WaitUntil(() => lineAnimations.upLineMover.lineDown);
+        enemyCardSocketsObject.SetActive(true);
         for (int i=0; i<4; i++)
         {
             //for enemy
             
-
+            
             if (EnemySelectedCards[i] != -1)
                 enemyCardSockets[i].GetComponent<SpriteRenderer>().sprite = cardDesk.cardDesk[EnemySelectedCards[i]]._SelectedImage; 
             else
