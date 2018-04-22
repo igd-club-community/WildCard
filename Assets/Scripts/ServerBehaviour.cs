@@ -140,10 +140,10 @@ public class ServerBehaviour : NetworkBehaviour
     void Update () {
         if (isServer)
         {
-            bool pl2ready = players[1].GetComponent<GameController>().ready;
-            bool pl1ready = players[0].GetComponent<GameController>().ready;
             if (state.Equals(State.Start) || state.Equals(State.Animation))
             {
+                bool pl2ready = players[1].GetComponent<GameController>().ready;
+                bool pl1ready = players[0].GetComponent<GameController>().ready;
                 if (pl1ready && pl2ready)
                 {
                     StartTimer();
@@ -151,6 +151,8 @@ public class ServerBehaviour : NetworkBehaviour
             }
             else if (state.Equals(State.Timer))
             {
+                bool pl2ready = players[1].GetComponent<GameController>().ready;
+                bool pl1ready = players[0].GetComponent<GameController>().ready;
                 if (pl1ready && pl2ready)
                 {
                     StartRound();
