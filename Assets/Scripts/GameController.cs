@@ -105,9 +105,12 @@ public class GameController : NetworkBehaviour {
     [ClientRpc]
     public void Rpc_StartTimer()
     {
-        preRoundTimer.SetActive(true);
-        preRoundTimer.GetComponent<Animator>().SetTrigger("StartTimer");
-        StartCoroutine(CountTimer(preRoundTime));
+        if (isLocalPlayer)
+        {
+            preRoundTimer.SetActive(true);
+            preRoundTimer.GetComponent<Animator>().SetTrigger("StartTimer");
+            StartCoroutine(CountTimer(preRoundTime));
+        }
 
     }
 
