@@ -127,6 +127,7 @@ public class ServerBehaviour : NetworkBehaviour
 
     private void StartTimer()
     {
+        state = State.Timer;
         foreach(GameObject player in players)
         {
             player.GetComponent<GameController>().ready = false;
