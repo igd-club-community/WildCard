@@ -71,7 +71,7 @@ public class GameController : NetworkBehaviour {
     }
 
 
-    IEnumerator StartRoundWithDelay(float time)
+    IEnumerator CountTimer(float time)
     {
         yield return new WaitForSeconds(time);
 
@@ -94,14 +94,9 @@ public class GameController : NetworkBehaviour {
             AvailableCards[i] = index;
         }
         Cmd_InitSelectedCards();
-        for (int i = 0; i < 4; i++)
-        {
+       
 
-            cardSockets[i].GetComponent<SpriteRenderer>().sprite = cardDesk.cardDesk[AvailableCards[i]]._NotSelectedImage;
-        }
-
-        AudioSource audio = GetComponent<AudioSource>();
-        audio.Play();
+        
         Cmd_SetReady(true);
     }
 
@@ -112,8 +107,8 @@ public class GameController : NetworkBehaviour {
     {
         preRoundTimer.SetActive(true);
         preRoundTimer.GetComponent<Animator>().SetTrigger("StartTimer");
-        StartCoroutine(StartRoundWithDelay(preRoundTime));
-        
+        StartCoroutine(CountTimer(preRoundTime));
+
     }
 
     [ClientRpc]
@@ -123,10 +118,13 @@ public class GameController : NetworkBehaviour {
         if (isLocalPlayer)
         {
             Cmd_SetReady(false); //#TODO check is it need or not
-           
-          
-           
+            for (int i = 0; i < 4; i++)
+            {
 
+                cardSockets[i].GetComponent<SpriteRenderer>().sprite = cardDesk.cardDesk[AvailableCards[i]]._NotSelectedImage;
+            }
+            AudioSource audio = GetComponent<AudioSource>();
+            audio.Play();
         }
     }
 
