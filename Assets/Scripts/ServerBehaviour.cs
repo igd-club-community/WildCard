@@ -26,7 +26,7 @@ public class ServerBehaviour : NetworkBehaviour
 
     // Use this for initialization
     void Start () {
-		
+        state = State.Connecting;
 	}
 
     private void StartRound()
