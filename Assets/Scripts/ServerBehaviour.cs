@@ -19,7 +19,7 @@ public class ServerBehaviour : NetworkBehaviour
     
     public enum State
     {
-         Connecting, Start, Round, Animation, Finish
+         Connecting, Start, Timer, Round, Animation, Finish
     }
 
     public List<GameObject> players = new List<GameObject>();
@@ -125,19 +125,34 @@ public class ServerBehaviour : NetworkBehaviour
     }
 
 
+    private void StartTimer()
+    {
+        foreach(GameObject player in players)
+        {
+            player.GetComponent<GameController>().ready = false;
+            player.GetComponent<GameController>().Rpc_StartTimer();
+        }
+    }
+
 
     bool isFinished = false;
     // Update is called once per frame
     void Update () {
         if (isServer)
         {
+            bool pl2ready = players[1].GetComponent<GameController>().ready;
+            bool pl1ready = players[0].GetComponent<GameController>().ready;
             if (state.Equals(State.Start) || state.Equals(State.Animation))
             {
-                bool pl2ready = players[1].GetComponent<GameController>().ready;
-                bool pl1ready = players[0].GetComponent<GameController>().ready;
                 if (pl1ready && pl2ready)
                 {
-                    Debug.Log("Both true");
+                    StartTimer();
+                }
+            }
+            else if (state.Equals(State.Timer))
+            {
+                if (pl1ready && pl2ready)
+                {
                     StartRound();
                 }
             }
