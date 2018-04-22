@@ -30,6 +30,8 @@ public class GameController : NetworkBehaviour {
     private PlayerController player;
     private EnemyController enemy;
 
+    public bool amIAnimate;
+
     public Card emptyCard;
 
     //for server interaction:
@@ -164,7 +166,7 @@ public class GameController : NetworkBehaviour {
 
     private IEnumerator Animate(PlayerState player0State, PlayerState player1State, int shooterID)
     {
-
+        amIAnimate = true;
         yield return AnimatePlayedCards();
         yield return AnimateShoot(shooterID);
         if (ID == 0)
@@ -178,6 +180,7 @@ public class GameController : NetworkBehaviour {
             rightHPBar.GetComponent<SpriteRenderer>().sprite = hpBarSprites[health];
         }
         yield return AnimateCharacters(player0State, player1State);
+        amIAnimate = false;
         Cmd_SetReady(true); // I hope it would work
     }
 
@@ -222,7 +225,7 @@ public class GameController : NetworkBehaviour {
             //for player
             if (SelectedCards[i] != -1)
                 cardSockets[i].GetComponent<SpriteRenderer>().sprite = cardDesk.cardDesk[AvailableCards[i]]._SelectedImage;
-            else
+            else 
                 cardSockets[i].GetComponent<SpriteRenderer>().sprite = emptyCard._SelectedImage;
         }
 
