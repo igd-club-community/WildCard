@@ -193,6 +193,8 @@ MonoBehaviour:
   - {fileID: 21300000, guid: edf2e6c904b378b4d8bb5783fc0b01aa, type: 3}
   leftHPBar: {fileID: 0}
   rightHPBar: {fileID: 0}
+  sheriffStarPrefab: {fileID: 1670346625987780, guid: 0ee7680615ce93c4e96c2ae33a6c2623,
+    type: 2}
   enemyCardSocketsObject: {fileID: 0}
   preRoundTimer: {fileID: 0}
   emptyCard: {fileID: 0}

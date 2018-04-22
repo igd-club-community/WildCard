@@ -102,6 +102,18 @@ public class GameController : NetworkBehaviour {
 
         AudioSource audio = GetComponent<AudioSource>();
         audio.Play();
+        Cmd_SetReady(true);
+    }
+
+
+
+    [ClientRpc]
+    public void Rpc_StartTimer()
+    {
+        preRoundTimer.SetActive(true);
+        preRoundTimer.GetComponent<Animator>().SetTrigger("StartTimer");
+        StartCoroutine(StartRoundWithDelay(preRoundTime));
+        
     }
 
     [ClientRpc]
@@ -111,9 +123,8 @@ public class GameController : NetworkBehaviour {
         if (isLocalPlayer)
         {
             Cmd_SetReady(false); //#TODO check is it need or not
-            preRoundTimer.SetActive(true);
-            preRoundTimer.GetComponent<Animator>().SetTrigger("StartTimer");
-            StartCoroutine(StartRoundWithDelay(preRoundTime));
+           
+          
            
 
         }
