@@ -19,8 +19,7 @@ public class GameController : NetworkBehaviour {
     public GameObject leftHPBar;
     public GameObject rightHPBar;
 
-
-
+    public GameObject sheriffStarPrefab;
 
     public GameObject enemyCardSocketsObject;
 
@@ -266,12 +265,14 @@ public class GameController : NetworkBehaviour {
 
             if (ID == 0)
             {
+                Instantiate(sheriffStarPrefab, new Vector3(-3.05f, 3.33f, 0), Quaternion.identity);
                 player = GameObject.Instantiate(bluePlayerPrefab, new Vector3(-3.05f, -0.68f, 0), Quaternion.identity).GetComponent<PlayerController>();
                 enemy = GameObject.Instantiate(redEnemyPrefab, new Vector3(3.66f, -0.68f, 0), Quaternion.Euler(0, -180, 0)).GetComponent<EnemyController>();
                 player.gameController = this;
             }
             else
             {
+                Instantiate(sheriffStarPrefab, new Vector3(3.66f, 3.33f, 0), Quaternion.identity);
                 player = GameObject.Instantiate(redPlayerPrefab, new Vector3(3.66f, -0.68f, 0), Quaternion.Euler(0, -180, 0)).GetComponent<PlayerController>();
                 enemy = GameObject.Instantiate(BlueEnemyPrefab, new Vector3(-3.05f, -0.68f, 0), Quaternion.identity).GetComponent<EnemyController>();
                 player.gameController = this;
