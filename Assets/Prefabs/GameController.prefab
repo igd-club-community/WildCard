@@ -197,9 +197,11 @@ MonoBehaviour:
     type: 2}
   enemyCardSocketsObject: {fileID: 0}
   preRoundTimer: {fileID: 0}
+  amIAnimate: 0
   emptyCard: {fileID: 0}
   ID: 0
   didFire: 0
+  serverState: 0
   ready: 0
   health: 7
   enemyHealth: 7
