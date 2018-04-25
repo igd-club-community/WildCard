@@ -5,9 +5,9 @@ licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
     21300000: countdown-sheet_0
-    21300002: countdown-sheet_1
+    21300002: countdown-sheet_3
     21300004: countdown-sheet_2
-    21300006: countdown-sheet_3
+    21300006: countdown-sheet_1
   externalObjects: {}
   serializedVersion: 4
   mipmaps:
@@ -85,29 +85,15 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: countdown-sheet_0
+      name: countdown-sheet_3
       rect:
         serializedVersion: 2
-        x: 40
-        y: 0
-        width: 260
-        height: 320
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: countdown-sheet_1
-      rect:
-        serializedVersion: 2
-        x: 400
+        x: 399
         y: 0
         width: 180
         height: 320
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -121,13 +107,13 @@ TextureImporter:
         width: 220
         height: 320
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: countdown-sheet_3
+      name: countdown-sheet_1
       rect:
         serializedVersion: 2
         x: 1000
@@ -135,7 +121,7 @@ TextureImporter:
         width: 260
         height: 320
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []

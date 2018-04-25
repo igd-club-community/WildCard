@@ -223,4 +223,4 @@ MonoBehaviour:
   waitForMovement: 3
   speed: 10
   startMarker: {x: 0, y: 11, z: 0}
-  endMarker: {x: 0, y: 0.25, z: 0}
+  endMarker: {x: 0, y: 5.5, z: 0}
