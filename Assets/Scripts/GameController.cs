@@ -49,6 +49,9 @@ public class GameController : NetworkBehaviour {
     public SyncListInt EnemySelectedCards = new SyncListInt();
 
     [SyncVar]
+    public GameState serverState;
+
+    [SyncVar]
     public bool ready;
 
     [SyncVar]
@@ -59,18 +62,6 @@ public class GameController : NetworkBehaviour {
 
     [SyncVar]
     public int _maxHealth;
-
-    public enum GameStates
-    {
-        Menu,
-        Settings,
-        Tutorial,
-        Connecting,
-        StartWaiting,
-        Round,
-        Animation,
-        End
-    }
 
 
     IEnumerator CountTimer(float time)
@@ -298,7 +289,6 @@ public class GameController : NetworkBehaviour {
 
     private void Update()
     {
-
        
     }
 
@@ -361,21 +351,20 @@ public class GameController : NetworkBehaviour {
 
     public void SetSelectedCard(int index)
     {
-        
+        if (serverState != GameState.Round)
+            return;
         if (SelectedCards[index] == -1)
         {
             int value = AvailableCards[index];
             Cmd_SetSelectedCard(index, value);
-            if(SelectedCards[index] == value)
-                cardSockets[index].GetComponent<SpriteRenderer>().sprite = cardDesk.cardDesk[value]._SelectedImage;
+            cardSockets[index].GetComponent<SpriteRenderer>().sprite = cardDesk.cardDesk[value]._SelectedImage;
             
         }
         else
         {
             SelectedCards[index] = -1;
             Cmd_SetSelectedCard(index, -1);
-            if (SelectedCards[index] == -1)
-                cardSockets[index].GetComponent<SpriteRenderer>().sprite = cardDesk.cardDesk[AvailableCards[index]]._NotSelectedImage;
+            cardSockets[index].GetComponent<SpriteRenderer>().sprite = cardDesk.cardDesk[AvailableCards[index]]._NotSelectedImage;
         }
 
     }
@@ -383,7 +372,7 @@ public class GameController : NetworkBehaviour {
     [Command]
     public void Cmd_SetSelectedCard(int index, int value)
     {
-        if (GameObject.Find("GameServer").GetComponent<ServerBehaviour>().state == ServerBehaviour.State.Round)
+        if (GameObject.Find("GameServer").GetComponent<ServerBehaviour>().state == GameState.Round)
         {
             SelectedCards[index] = value;
         }
@@ -400,7 +389,7 @@ public class GameController : NetworkBehaviour {
     public void Cmd_FinishRound()
     {
         ServerBehaviour server = GameObject.Find("GameServer").GetComponent<ServerBehaviour>();
-        if (server.state == ServerBehaviour.State.Round)
+        if (server.state == GameState.Round)
         {
             didFire = true;
             server.FinishRound(ID);

@@ -197,9 +197,11 @@ MonoBehaviour:
     type: 2}
   enemyCardSocketsObject: {fileID: 0}
   preRoundTimer: {fileID: 0}
+  amIAnimate: 0
   emptyCard: {fileID: 0}
   ID: 0
   didFire: 0
+  serverState: 0
   ready: 0
   health: 7
   enemyHealth: 7
@@ -221,4 +223,4 @@ MonoBehaviour:
   waitForMovement: 3
   speed: 10
   startMarker: {x: 0, y: 11, z: 0}
-  endMarker: {x: 0, y: 0.25, z: 0}
+  endMarker: {x: 0, y: 5.5, z: 0}

@@ -7,7 +7,7 @@ public class ServerBehaviour : NetworkBehaviour
 {
     public const double roundTime = 10;
     public double endTime;
-    public State state = State.Connecting;
+    public GameState state = GameState.Connecting;
     public int roundNumber = 0;
 
     private struct PlayerActionStruct
@@ -16,22 +16,17 @@ public class ServerBehaviour : NetworkBehaviour
         public int heal;
         public int evade;
     }
-    
-    public enum State
-    {
-         Connecting, Start, Timer, Round, Animation, Finish
-    }
 
     public List<GameObject> players = new List<GameObject>();
 
     // Use this for initialization
     void Start () {
-        state = State.Connecting;
+        state = GameState.Connecting;
 	}
 
     private void StartRound()
     {
-        state = State.Round;
+        state = GameState.Round;
         endTime = Time.fixedTime + roundTime;
         Debug.Log("Starting Round");
         StartPlayerRound(players[0]);
@@ -47,7 +42,7 @@ public class ServerBehaviour : NetworkBehaviour
 
     public void Animate(PlayerState[] nextStates, int shooterID)
     {
-        state = State.Animation;
+        state = GameState.Animation;
         for (int i = 0; i < players.Count; i++)
         {
             GameController player = players[i].GetComponent<GameController>();
@@ -114,24 +109,32 @@ public class ServerBehaviour : NetworkBehaviour
     public void FinishRound(int shooterID)
     {
         Debug.Log("Finishing round");
-        if (state.Equals(State.Round))
+        if (state.Equals(GameState.Round))
         {
             PlayerState[] nextStates = ApplyActions();
             if (players[0].GetComponent<GameController>().health>0 && players[1].GetComponent<GameController>().health>0)
                 Animate(nextStates, shooterID);
             else
-                state = State.Finish;
+                state = GameState.Finish;
         }
     }
 
 
     private void StartTimer()
     {
-        state = State.Timer;
+        state = GameState.Timer;
         foreach(GameObject player in players)
         {
             player.GetComponent<GameController>().ready = false;
             player.GetComponent<GameController>().Rpc_StartTimer();
+        }
+    }
+
+    private void UpdatePlayerGameStates()
+    {
+        foreach(GameObject player in players)
+        {
+            player.GetComponent<GameController>().serverState = state;
         }
     }
 
@@ -141,7 +144,7 @@ public class ServerBehaviour : NetworkBehaviour
     void Update () {
         if (isServer)
         {
-            if (state.Equals(State.Start) || state.Equals(State.Animation))
+            if (state.Equals(GameState.Start) || state.Equals(GameState.Animation))
             {
                 bool pl2ready = players[1].GetComponent<GameController>().ready;
                 bool pl1ready = players[0].GetComponent<GameController>().ready;
@@ -150,7 +153,7 @@ public class ServerBehaviour : NetworkBehaviour
                     StartTimer();
                 }
             }
-            else if (state.Equals(State.Timer))
+            else if (state.Equals(GameState.Timer))
             {
                 bool pl2ready = players[1].GetComponent<GameController>().ready;
                 bool pl1ready = players[0].GetComponent<GameController>().ready;
@@ -159,14 +162,14 @@ public class ServerBehaviour : NetworkBehaviour
                     StartRound();
                 }
             }
-            else if (state.Equals(State.Round))
+            else if (state.Equals(GameState.Round))
             {
                 if (endTime < Time.fixedTime)
                 {
                     FinishRound(-1);
                 }
             }
-            else if (state.Equals(State.Finish) && !isFinished)
+            else if (state.Equals(GameState.Finish) && !isFinished)
             {
                 isFinished = true;
                 int winner = -1;
@@ -180,6 +183,7 @@ public class ServerBehaviour : NetworkBehaviour
                     player.GetComponent<GameController>().Rpc_Finish(winner);
                 }
             }
+            UpdatePlayerGameStates();
             Debug.Log(state);
         }
 	}
