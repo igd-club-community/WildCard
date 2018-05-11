@@ -144,7 +144,17 @@ public class ServerBehaviour : NetworkBehaviour
     void Update () {
         if (isServer)
         {
-            if (state.Equals(GameState.Start) || state.Equals(GameState.Animation))
+            if (state.Equals(GameState.Start)) {
+                bool pl2ready = players[1].GetComponent<GameController>().ready;
+                bool pl1ready = players[0].GetComponent<GameController>().ready;
+                if (pl1ready && pl2ready)
+                {
+                    players[1].GetComponent<GameController>().Rpc_InitPlayerState();
+                    players[0].GetComponent<GameController>().Rpc_InitPlayerState();
+                    StartTimer();
+                }
+            }
+            else if (state.Equals(GameState.Animation))
             {
                 bool pl2ready = players[1].GetComponent<GameController>().ready;
                 bool pl1ready = players[0].GetComponent<GameController>().ready;
@@ -182,6 +192,7 @@ public class ServerBehaviour : NetworkBehaviour
                     player.GetComponent<GameController>().ready = false;
                     player.GetComponent<GameController>().Rpc_Finish(winner);
                 }
+                state = GameState.Start;
             }
             UpdatePlayerGameStates();
             Debug.Log(state);
