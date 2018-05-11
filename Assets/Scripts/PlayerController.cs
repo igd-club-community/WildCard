@@ -36,7 +36,7 @@ public class PlayerController : MonoBehaviour {
                 animator.SetTrigger("WasShot");
                 break;
             case PlayerState.Idle:
-                animator.SetTrigger("Stalled");
+                animator.SetTrigger("RoundStarted");
                 break;
             case PlayerState.Healing:
                 animator.SetTrigger("WasHealed");
