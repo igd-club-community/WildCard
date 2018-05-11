@@ -100,6 +100,7 @@ public class GameController : NetworkBehaviour {
         {
             leftHPBar.GetComponent<SpriteRenderer>().sprite = hpBarSprites[_maxHealth];
             rightHPBar.GetComponent<SpriteRenderer>().sprite = hpBarSprites[_maxHealth];
+            player.health = _maxHealth;
             player.SetState(PlayerState.Idle);
             enemy.SetState(PlayerState.Idle);
         }
