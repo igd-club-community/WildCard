@@ -93,7 +93,17 @@ public class GameController : NetworkBehaviour {
         Cmd_SetReady(true);
     }
 
-
+    [ClientRpc]
+    public void Rpc_InitPlayerState()
+    {
+        if (isLocalPlayer)
+        {
+            leftHPBar.GetComponent<SpriteRenderer>().sprite = hpBarSprites[_maxHealth];
+            rightHPBar.GetComponent<SpriteRenderer>().sprite = hpBarSprites[_maxHealth];
+            player.SetState(PlayerState.Idle);
+            enemy.SetState(PlayerState.Idle);
+        }
+    }
 
     [ClientRpc]
     public void Rpc_StartTimer()

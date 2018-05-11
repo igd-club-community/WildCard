@@ -97,7 +97,11 @@ public class PlayerController : MonoBehaviour {
             gameController.SetSelectedCard(3);
         }
 
-     
+        if (Input.GetButtonDown("Start") && gameController.serverState == GameState.Start)
+        {
+            gameController.Cmd_SetReady(true);
+        }
+
         
 
             //Gamepad Shot
