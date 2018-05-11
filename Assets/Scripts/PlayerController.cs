@@ -99,6 +99,7 @@ public class PlayerController : MonoBehaviour {
 
         if (Input.GetButtonDown("Start") && gameController.serverState == GameState.Start)
         {
+            GameObject.Find("pressStartSprite").GetComponent<SpriteRenderer>().enabled = false;
             gameController.Cmd_SetReady(true);
         }
 

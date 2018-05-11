@@ -13,6 +13,7 @@ public class GameController : NetworkBehaviour {
     public int[] AvailableCards;
     public GameObject[] cardSockets;
     public GameObject[] enemyCardSockets;
+    public GameObject pressStartSprite;
 
     public Sprite[] hpBarSprites;
     
@@ -347,10 +348,26 @@ public class GameController : NetworkBehaviour {
                     leftHPBar.GetComponent<SpriteRenderer>().sprite = hpBarSprites[0];
                     break;
             }
+            
+            StartCoroutine(ShowPressStart());
+            
         }
     }
 
-    [Command]
+    private IEnumerator ShowPressStart()
+    {
+        
+        yield return new WaitForSeconds(2f);
+        pressStartSprite = GameObject.Find("pressStartSprite");
+        pressStartSprite.GetComponent<SpriteRenderer>().enabled = true;
+
+    }
+
+
+
+
+
+   [Command]
     private void Cmd_InitSelectedCards()
     {
         SelectedCards.Clear();
