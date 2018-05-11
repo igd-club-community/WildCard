@@ -138,6 +138,17 @@ public class ServerBehaviour : NetworkBehaviour
         }
     }
 
+    private void InitPlayers()
+    {
+        foreach (GameObject player in players)
+        {
+            GameController playerController = player.GetComponent<GameController>();
+            playerController.health = playerController._maxHealth;
+            playerController.enemyHealth = playerController._maxHealth;
+            player.GetComponent<GameController>().Rpc_InitPlayerState();
+        }
+    }
+
 
     bool isFinished = false;
     // Update is called once per frame
@@ -149,8 +160,7 @@ public class ServerBehaviour : NetworkBehaviour
                 bool pl1ready = players[0].GetComponent<GameController>().ready;
                 if (pl1ready && pl2ready)
                 {
-                    players[1].GetComponent<GameController>().Rpc_InitPlayerState();
-                    players[0].GetComponent<GameController>().Rpc_InitPlayerState();
+                    InitPlayers();
                     StartTimer();
                 }
             }
