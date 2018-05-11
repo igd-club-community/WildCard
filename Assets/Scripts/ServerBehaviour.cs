@@ -149,8 +149,6 @@ public class ServerBehaviour : NetworkBehaviour
         }
     }
 
-
-    bool isFinished = false;
     // Update is called once per frame
     void Update () {
         if (isServer)
@@ -189,9 +187,8 @@ public class ServerBehaviour : NetworkBehaviour
                     FinishRound(-1);
                 }
             }
-            else if (state.Equals(GameState.Finish) && !isFinished)
+            else if (state.Equals(GameState.Finish))
             {
-                isFinished = true;
                 int winner = -1;
                 if (players[0].GetComponent<GameController>().health > 0)
                     winner = 0;
